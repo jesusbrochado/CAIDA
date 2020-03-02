@@ -42,7 +42,7 @@ localAuthentication = re.search("My authentication method is '(.+?)'", userLog).
 
 # proposal_phase_2 // wait
 # protocol_phase_2 // wait
- 
+
 proposal_number_phase_2 = re.search('Num of TSs: (.+?), reserved 0x0, reserved 0x0', userLog).group(1)
 peerAuthenticationType = re.search('peer auth method set to: (.+?)\n', userLog).group(1) # 1 PKI, 2 PSK
 peerAuthenticationComplete = True if re.search(r'Completed authentication for connection',userLog) else  False
@@ -85,5 +85,3 @@ print("tunelUp: ", tunelUp)
 #functions.conf_ini(initiator,filters,dici)
 #for row in dici:
 #    lambdas.cprint(row)
-
-
