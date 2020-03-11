@@ -11,93 +11,93 @@ class Application(ttk.Frame):
             main_window.title("CAIDA")
             main_window.columnconfigure(0, weight=1)
             main_window.rowconfigure(0, weight=1)
-            main_window.geometry('{}x{}'.format(720, 480))
+            main_window.minsize(width=1080, height=650)
             
             #Frame top
-            frTop = tk.Frame(self,bg="#f0ff00")
+            frTop = tk.Frame(self,bg="#f4f7ff",width=120, height=80)
             frTop.grid(row=0, column=0, sticky="nsew",columnspan=3)
             frTop.grid_rowconfigure(0, weight=1)
-          
-            enImport = tk.Entry(frTop)
-            enImport.grid(row=0, column=0, sticky="ew", ipady=5, padx=10)
+           
+            enImport = tk.Entry(frTop,font=("Georgia", 12))
+            enImport.grid(row=0, column=0, sticky="ew", ipady=5, padx=10, ipadx=10)
             frTop.grid_columnconfigure(0, weight=8)
             
-            btnImport = tk.Button(frTop, bg="#96989A", text="Importar", command=functions.UploadAction)
+            btnImport = tk.Button(frTop, bg="#ffffff", text="Importar", command=functions.UploadAction,font=("Georgia", 12))
             btnImport.grid(row=0, column=1, sticky="ew", ipady=3, padx=10)
             frTop.grid_columnconfigure(1, weight=1)
             
-            btnExec = tk.Button(frTop, bg="#96989A", text="Execute", command=functions.UploadAction)
+            btnExec = tk.Button(frTop, bg="#ffffff", text="Execute", command=functions.UploadAction, font=("Georgia", 12))
             btnExec.grid(row=0, column=2, sticky="ew", ipady=3, padx=10)
             frTop.grid_columnconfigure(2, weight=1)
             
             #Frame center left
-            frCenterLeft = tk.Frame(self,bg="#000000")
+            frCenterLeft = tk.Frame(self,bg="#f4f7ff")
             frCenterLeft.grid(row=1, column=0, sticky="nsew")
             frCenterLeft.grid_columnconfigure(0, weight=1)
             
-            lblTitle1 = tk.Label(frCenterLeft,bg="#fdfefe", text="Phase 1 Initial Configuration")
-            lblTitle1.grid(row=1, column=0, sticky="nsew", ipady=3, padx=10, pady=10)
+            lblTitle1 = tk.Label(frCenterLeft,bg="#73e8fa", text="Phase 1 Initial Configuration", font=("Georgia", 12))
+            lblTitle1.grid(row=1, column=0, sticky="nsew", ipady=3, padx=10)
             lblTitle1.grid_rowconfigure(1, weight=1)
             frCenterLeft.grid_rowconfigure(1, weight=1)
 
             
-            lblPhase1 = tk.Label(frCenterLeft,bg="#96989A", text="aqui va la configuracion inicial fase 1" )
+            lblPhase1 = tk.Label(frCenterLeft,bg="#ffffff", text="aqui va la configuracion inicial fase 1", font=("Georgia", 12) )
             lblPhase1.grid(row=2, column=0, sticky="nsew", ipady=3, padx=10)
             lblPhase1.grid_rowconfigure(2, weight=5)
-            frCenterLeft.grid_rowconfigure(2, weight=8)
+            frCenterLeft.grid_rowconfigure(2, weight=20)
 
             #Frame center center
-            frCenter = tk.Frame(self,bg="#c0a2fd")
+            frCenter = tk.Frame(self,bg="#f4f7ff")
             frCenter.grid(row=1, column=1, sticky="nsew")
             frCenter.grid_columnconfigure(1, weight=1)
             
-            lblTitle0 = tk.Label(frCenter,bg="#fdfefe", text="Phase 2 Initial Configuration")
-            lblTitle0.grid(row=1, column=1, sticky="nsew", ipady=3, padx=10, pady=10)
+            lblTitle0 = tk.Label(frCenter,bg="#73e8fa", text="Phase 2 Initial Configuration", font=("Georgia", 12))
+            lblTitle0.grid(row=1, column=1, sticky="nsew", ipady=3, padx=10)
             lblTitle0.grid_rowconfigure(1, weight=1)
             frCenter.grid_rowconfigure(1, weight=1)
 
             
-            lblPhase0 = tk.Label(frCenter,bg="#96989A", text="aqui va la configuracion inicial fase 2" )
+            lblPhase0 = tk.Label(frCenter,bg="#ffffff", text="aqui va la configuracion inicial fase 2", font=("Georgia", 12))
             lblPhase0.grid(row=2, column=1, sticky="nsew", ipady=3, padx=10)
             lblPhase0.grid_rowconfigure(2, weight=5)
-            frCenter.grid_rowconfigure(2, weight=8)
+            frCenter.grid_rowconfigure(2, weight=20)
 
 
             #Frame center right
-            frCenterRight = tk.Frame(self,bg="#000000")
+            frCenterRight = tk.Frame(self,bg="#f4f7ff")
             frCenterRight.grid(row=1, column=2, sticky="nsew")
             frCenterRight.grid_columnconfigure(2, weight=1)
             
-            lblTitle2 = tk.Label(frCenterRight,bg="#fdfefe", text="Phase 3 Initial Configuration")
-            lblTitle2.grid(row=1, column=2, sticky="nsew", ipady=3, padx=10, pady=10)
+            lblTitle2 = tk.Label(frCenterRight,bg="#73e8fa", text="Phase 3 Initial Configuration", font=("Georgia", 12))
+            lblTitle2.grid(row=1, column=2, sticky="nsew", ipady=3, padx=10)
             lblTitle2.grid_rowconfigure(1, weight=1)
             frCenterRight.grid_rowconfigure(1, weight=1)
 
             
-            lblPhase2 = tk.Label(frCenterRight,bg="#96989A", text="aqui va la configuracion inicial fase 3" )
+            lblPhase2 = tk.Label(frCenterRight,bg="#ffffff", text="aqui va la configuracion inicial fase 3", font=("Georgia", 12))
             lblPhase2.grid(row=2, column=2, sticky="nsew", ipady=3, padx=10)
             lblPhase2.grid_rowconfigure(2, weight=5)
-            frCenterRight.grid_rowconfigure(2, weight=8)
+            frCenterRight.grid_rowconfigure(2, weight=20)
             
             #Frame Bot
-            frBot = tk.Frame(self,bg="#fda2c0")
+            frBot = tk.Frame(self,bg="#f4f7ff")
             frBot.grid(row=2, column=0, sticky="nsew",columnspan=3)
-            frBot.grid_columnconfigure(1, weight=1)
+            frBot.grid_columnconfigure(1, weight=2)
             
-            lblConf = tk.Label(frBot,bg="#00ffd8", text="Some Message here")
+            lblConf = tk.Label(frBot,bg="#ffffff", text="Some Message here", font=("Georgia", 12))
             lblConf.grid(row=2, column=1, sticky="nsew", padx=10, pady=10)
             lblConf.grid_rowconfigure(1, weight=5)
             frBot.grid_rowconfigure(2, weight=8)
 
             
-            #Frame Bot Bot
-            frBotBot = tk.Frame(self,bg="#f0ff00")
+            #Frame Footer
+            frBotBot = tk.Frame(self,bg="#f4f7ff")
             frBotBot.grid(row=3, column=0, sticky="nsew",columnspan=3)
             frBotBot.grid_rowconfigure(3, weight=1)
             frBotBot.grid_columnconfigure(1, weight=1)
             
-            lblConf = tk.Label(frBotBot,bg="#fdfefe", text="Some Message here")
-            lblConf.grid(row=3, column=1, sticky="ew", padx=10)
+            lblConf = tk.Label(frBotBot,bg="#ffffff", text="Informacion sobre el status de la ejecucion ...",font=("Georgia", 10))
+            lblConf.grid(row=3, column=1, sticky="ew")
             lblConf.grid_rowconfigure(3, weight=1)
 
             self.grid(sticky="nsew")
