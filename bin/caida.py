@@ -14,8 +14,13 @@ filters = lambdas.csvToDict('logs_init.csv')
 iniciator = True if re.search(r'EV_INIT_SA',userLog) else  False
 
 #PENDING!
-#peer = re.search('attempting to find tunnel group for IP:(.+?)\n', userLog).group(1)    Si esto retorna vacio entonces lo de abajo
-peer = re.search('Sending Packet \[To (.+?)', userLog).group(1)
+
+#print("2222222222222222222222")
+#print(functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)))
+#print("2222222222222222222222")
+
+#peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))    #Si esto retorna vacio entonces lo de abajo
+peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
 
 #PENDING!
 #proposalType = "PKI" if re.search('my_auth_method = (.+?)\n', userLog).group(1) == 1 else "PSK" #Proposal type: 1 PKI, 2 PSK y si no sale entonces "My authentication method is"

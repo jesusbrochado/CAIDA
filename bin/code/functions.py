@@ -14,3 +14,14 @@ def test(data):
         filtro = next(data)
         pos = next(data)
         yield filtro, pos
+
+def checkNotFound(log):
+    try:
+        print("I am HERE!!!")
+        if not (log is None):
+            return log.group(1)
+        else:
+            return "Not found"
+    except Exception as e:
+        if (e == 'NoneType'):
+            return "Not Found"
