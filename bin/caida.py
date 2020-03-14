@@ -14,23 +14,18 @@ filters = lambdas.csvToDict('logs_init.csv')
 iniciator = True if re.search(r'EV_INIT_SA',userLog) else  False
 
 #PENDING!
-
-#print("2222222222222222222222")
-#print(functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)))
-#print("2222222222222222222222")
-
-#peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))    #Si esto retorna vacio entonces lo de abajo
+#peer = re.search('attempting to find tunnel group for IP:(.+?)\n', userLog).group(1)    Si esto retorna vacio entonces lo de abajo
 peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
 
 #PENDING!
-#proposalType = "PKI" if re.search('my_auth_method = (.+?)\n', userLog).group(1) == 1 else "PSK" #Proposal type: 1 PKI, 2 PSK y si no sale entonces "My authentication method is"
+#proposalType = "PKI" if re.search('my_auth_method = (.+?)\n', userLog).group(1) == 1 else "PSK" #Proposal type: 1 PKI, 2 PSK tambien puede salir  "My authentication method is"
 proposalType = "PKI" if re.search('My authentication method is (.+?)\n', userLog).group(1) == 1 else "PSK"
 
 #tunnelType = re.search('tunn grp type set to: (.+?)\n', userLog).group(1) #"site to site by default, si encuentre entonces el string que encuentre"
 
 #Special case this must be a collection NEED REFIX IT
-proposal_phase_1 = re.search('Proposal: (.+?), Protocol', userLog).group(1)
-protocol_phase_1 = re.search('Protocol id: (.+?), SPI', userLog).group(1)
+proposal_phase_1 = functions.checkNotFound(re.search('Proposal: (.+?), Protocol', userLog))
+protocol_phase_1 = functions.checkNotFound(re.search('Protocol id: (.+?), SPI', userLog))
 phase_1 = True if re.search(r'\(I\) MsgID = 00000000 CurState: INIT_DONE Event: EV_CHK4_ROLE',userLog) else  False
 
 # NAT Detection
@@ -45,26 +40,26 @@ remote_NAT_T = True if re.search(r'NAT OUTSIDE found',userLog) else  False
 # localKeyLength #Question what establish if is remote or local?
 # remoteKeyLength #Question what establish if is remote or local?
 
-localAuthentication = re.search("My authentication method is '(.+?)'", userLog).group(1)
+localAuthentication = functions.checkNotFound(re.search("My authentication method is '(.+?)'", userLog))
 
 # proposal_phase_2 // wait 
 # protocol_phase_2 // wait
 
-proposal_number_phase_2 = re.search('Num of TSs: (.+?), reserved 0x0, reserved 0x0', userLog).group(1)
+proposal_number_phase_2 = functions.checkNotFound(re.search('Num of TSs: (.+?), reserved 0x0, reserved 0x0', userLog))
 
 #PENDING!
 #peerAuthenticationType = "PKI" if re.search('peer auth method set to: (.+?)\n', userLog).group(1) == 1 else "PSK"# 1 PKI, 2 PSK  O si no hace match entonces "Peer's authentication method is" toca poner bien la comilla
 #peerAuthenticationType = "PKI" if re.search('Peer\'s authentication method is \n', userLog).group(1) == 1 else "PSK"
 peerAuthenticationComplete = True if re.search(r'Completed authentication for connection',userLog) else  False
-idleTimeout = re.search('idle timeout set to: (.+?)\n', userLog).group(1)
-sessionTimeout = re.search('session timeout set to: (.+?)\n', userLog).group(1)
-nameGroupPolicy = re.search('group policy set to (.+?)\n', userLog).group(1)
-DPDtimer = re.search('Initializing DPD, configured for (.+?) seconds', userLog).group(1)
+idleTimeout = functions.checkNotFound(re.search('idle timeout set to: (.+?)\n', userLog))
+sessionTimeout = functions.checkNotFound(re.search('session timeout set to: (.+?)\n', userLog))
+nameGroupPolicy = functions.checkNotFound(re.search('group policy set to (.+?)\n', userLog))
+DPDtimer = functions.checkNotFound(re.search('Initializing DPD, configured for (.+?) seconds', userLog))
 #PENDING!
 #cryptoMapSecuence = re.search('PROXY MATCH on crypto map (.+?) seq (.+?)\n', userLog).group(1)
-I_SPI = re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', userLog).group(1)
+I_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', userLog))
 ## Add ignore some value for regex
-R_SPI = re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog).group(1)
+R_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog))
 tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) else  False
 
 
