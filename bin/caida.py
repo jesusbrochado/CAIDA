@@ -5,7 +5,7 @@ from code import lambdas, functions
 import re
 
 ## DECLARATIONS
-filePath = '../pub/debugs/init_NAT_T_Working.txt'
+filePath = '../pub/debugs/userlog2.txt'
 userLog = lambdas.readDebugs(filePath) # is constant for now!!!
 filters = lambdas.csvToDict('logs_init.csv')
 
@@ -13,20 +13,22 @@ filters = lambdas.csvToDict('logs_init.csv')
 # Here we extract key data from the string get userLog that user enter to the system.
 iniciator = True if re.search(r'EV_INIT_SA',userLog) else  False
 
-#PENDING!
+if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != "Not Found")):
+    peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
+else:
+    peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))
 
-#print("2222222222222222222222")
-#print(functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)))
-#print("2222222222222222222222")
+if((functions.checkNotFound(re.search('my_auth_method = (.+?)\n', userLog) != "Not Found"))):
+    proposalType = "PSK" if re.search('my_auth_method = (.+?)\n', userLog).group(1) == 2 else "PKI"
+else:
+    proposalType = functions.checkNotFound(re.search('My authentication method is (.+?)\n', userLog))
 
-#peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))    #Si esto retorna vacio entonces lo de abajo
-peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
-
-#PENDING!
-#proposalType = "PKI" if re.search('my_auth_method = (.+?)\n', userLog).group(1) == 1 else "PSK" #Proposal type: 1 PKI, 2 PSK y si no sale entonces "My authentication method is"
-proposalType = "PKI" if re.search('My authentication method is (.+?)\n', userLog).group(1) == 1 else "PSK"
 
 #tunnelType = re.search('tunn grp type set to: (.+?)\n', userLog).group(1) #"site to site by default, si encuentre entonces el string que encuentre"
+if (re.search('tunn grp type set to: (.+?)\n', userLog) is not None):
+    tunnelType = re.search('tunn grp type set to: (.+?)\n', userLog)
+else:
+    tunnelType = "site to site"
 
 #Special case this must be a collection NEED REFIX IT
 proposal_phase_1 = re.search('Proposal: (.+?), Protocol', userLog).group(1)
@@ -47,14 +49,21 @@ remote_NAT_T = True if re.search(r'NAT OUTSIDE found',userLog) else  False
 
 localAuthentication = re.search("My authentication method is '(.+?)'", userLog).group(1)
 
-# proposal_phase_2 // wait 
+# proposal_phase_2 // wait
 # protocol_phase_2 // wait
 
 proposal_number_phase_2 = re.search('Num of TSs: (.+?), reserved 0x0, reserved 0x0', userLog).group(1)
 
 #PENDING!
-#peerAuthenticationType = "PKI" if re.search('peer auth method set to: (.+?)\n', userLog).group(1) == 1 else "PSK"# 1 PKI, 2 PSK  O si no hace match entonces "Peer's authentication method is" toca poner bien la comilla
-#peerAuthenticationType = "PKI" if re.search('Peer\'s authentication method is \n', userLog).group(1) == 1 else "PSK"
+## 1 PKI, 2 PSK  O si no hace match entonces "Peer's authentication method is" toca poner bien la comilla
+#
+
+if(re.search('peer auth method set to: (.+?)\n', userLog) is not None):
+    peerAuthenticationType = "PSK" if re.search('peer auth method set to: (.+?)\n', userLog).group(1) == 2 else "PKI"
+else:
+    peerAuthenticationType = functions.checkNotFound(re.search("Peer's authentication method is '(.+?)'\n", userLog))
+
+
 peerAuthenticationComplete = True if re.search(r'Completed authentication for connection',userLog) else  False
 idleTimeout = re.search('idle timeout set to: (.+?)\n', userLog).group(1)
 sessionTimeout = re.search('session timeout set to: (.+?)\n', userLog).group(1)
@@ -72,7 +81,7 @@ tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) else  Fal
 print("iniciator: ", iniciator)
 print("peer: ", peer)
 print("proposalType: ", proposalType)
-#print("tunnelType: ", tunnelType)
+print("tunnelType: ", tunnelType)
 print("proposal_phase_1", proposal_phase_1)
 print("protocol_phase_1", protocol_phase_1)
 print("Phase 1 is enable: ", phase_1)
@@ -81,7 +90,7 @@ print("NAT T Local: ", us_NAT_T)
 print("NAT T Remote: ", remote_NAT_T)
 print("localAuthentication: ", localAuthentication)
 print("proposal_number_phase_2: ", proposal_number_phase_2)
-#print("authenticationPeerType: ", peerAuthenticationType)
+print("authenticationPeerType: ", peerAuthenticationType)
 print("peerAuthenticationComplete: ", peerAuthenticationComplete)
 print("idleTimeout: ", idleTimeout)
 print("sessionTimeout: ", sessionTimeout)
@@ -125,7 +134,6 @@ sa_traffic_init_remote = filterProposal('TSr(.+?):   Next payload: NOTIFY, reser
 sa_traffic_agreed_local= filterProposal('TSi  Next payload: TSr', ' TSr  Next payload: NOTIFY, res')
 sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: I_WAIT_AUTH Event: EV_RECV_AUTH')
 
-
 #LOAD PHASE 1 SENT
 p1_proposal = re.findall('Proposal: (.+?)', p1_prop_string)
 p1_proposal_encryption = re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_prop_string)
@@ -150,8 +158,20 @@ p2_proposal_esn = re.findall('type: 5, reserved: 0x0, id: (.+?)\n', p2_prop)
 local_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_local)
 remote_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_remote)
 
+
+# Si sa_traffic_agreed_local y/o sa_traffic_agreed_remote estan vacios,entonces utilizar
+# la ultima posicion de las listas sa_traffic_init_local & sa_traffic_init_remote
+
+# tart addr: 172.16.0.20, end addr: 172.16.0.20
+
 agreed_sa_local = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_local)
+if (len(agreed_sa_local) == 0):
+    agreed_sa_local = [local_sa_sent[-1]]
+
 agreed_sa_remote = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_remote)
+
+if(len(agreed_sa_remote) == 0):
+    agreed_sa_remote = [remote_sa_sent[-1]]
 
 print("=========================")
 print("PROPOSALS SENT FROM INITIATOR")
@@ -212,5 +232,4 @@ print("Remote SA :" , agreed_sa_remote)
 #functions.conf_ini(initiator,filters,dici)
 #for row in dici:
 #    lambdas.cprint(row)
-
 

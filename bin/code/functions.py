@@ -17,7 +17,6 @@ def test(data):
 
 def checkNotFound(log):
     try:
-        print("I am HERE!!!")
         if not (log is None):
             return log.group(1)
         else:
