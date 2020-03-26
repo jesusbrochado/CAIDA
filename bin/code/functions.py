@@ -10,18 +10,20 @@ def conf_ini(initiator, filters, dici):
                 dici.append((initiator[pos:pos+int(filters.get(words))]))
                 break
     return dici
+    
 def test(data):
     data = iter(data)
     while True:
         filtro = next(data)
         pos = next(data)
         yield filtro, pos
-       
-def UploadAction(event=None):
-            file = filedialog.askopenfilename( title='Choose a file', initialdir="/home/")
-            #print('Selected:', filename)
-            if file != None:
-                pathImp = file
-                print (pathImp)
-                userLog = lambdas.readDebugs(pathImp) # is constant for now!!!
-                return userLog
+
+def checkNotFound(log):
+    try:
+        if not (log is None):
+            return log.group(1)
+        else:
+            return "Not found"
+    except Exception as e:
+        if (e == 'NoneType'):
+            return "Not Found"
