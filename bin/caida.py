@@ -5,7 +5,7 @@ from code import lambdas, functions
 import re
 
 ## DECLARATIONS
-filePath = '../pub/debugs/holi.txt'
+filePath = '../pub/debugs/userLog2.txt'
 userLog = lambdas.readDebugs(filePath) # is constant for now!!!
 filters = lambdas.csvToDict('logs_init.csv')
 
@@ -149,14 +149,25 @@ p1_proposal_integrity_resp = re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p
 p1_proposal_group_resp = re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_resp)
 
 #LOAD PHASE 2
-p2_proposal = re.findall('Proposal: (.+?)', p2_prop)
-p2_proposal_encryption = re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p2_prop)
-p2_proposal_hash = re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p2_prop)
-p2_proposal_esn = re.findall('type: 5, reserved: 0x0, id: (.+?)\n', p2_prop)
+if (p2_prop is not None): # flag p2_prop a veces llega None????
+    p2_proposal = functions.checkNotFound(re.findall('Proposal: (.+?)', p2_prop))
+    p2_proposal_encryption =functions.checkNotFound( re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p2_prop))
+    p2_proposal_hash = functions.checkNotFound(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p2_prop))
+    p2_proposal_esn = functions.checkNotFound(re.findall('type: 5, reserved: 0x0, id: (.+?)\n', p2_prop))
+else:
+    p2_proposal = "Not Found"
+    p2_proposal_encryption = "Not Found"
+    p2_proposal_hash = "Not Found"
+    p2_proposal_esn = "Not Found"
 
 #INTERSTING TRAFFIC
+
 local_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_local)
-remote_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_remote)
+
+if(sa_traffic_init_remote is not None): # flag este valor a vece llega como None????
+    remote_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_remote)
+else:
+    remote_sa_sent = "Not Found"
 
 
 # Si sa_traffic_agreed_local y/o sa_traffic_agreed_remote estan vacios,entonces utilizar
@@ -168,7 +179,10 @@ agreed_sa_local = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_
 if (len(agreed_sa_local) == 0):
     agreed_sa_local = [local_sa_sent[-1]]
 
-agreed_sa_remote = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_remote)
+if (sa_traffic_agreed_remote is not None):
+    agreed_sa_remote = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_remote)
+else:
+    agreed_sa_remote = "Not Found"
 
 if(len(agreed_sa_remote) == 0):
     agreed_sa_remote = [remote_sa_sent[-1]]
