@@ -42,8 +42,6 @@ remote_NAT_T = True if re.search(r'NAT OUTSIDE found',userLog) else  False
 
 
 
-
-
 # localKeyLength #Question what establish if is remote or local?
 # remoteKeyLength #Question what establish if is remote or local?
 
@@ -75,33 +73,6 @@ I_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', u
 ## Add ignore some value for regex
 R_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog))
 tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) else  False
-
-
-
-print("iniciator: ", iniciator)
-print("peer: ", peer)
-print("proposalType: ", proposalType)
-print("tunnelType: ", tunnelType)
-print("proposal_phase_1", proposal_phase_1)
-print("protocol_phase_1", protocol_phase_1)
-print("Phase 1 is enable: ", phase_1)
-print("No NAT: ", noNATfound)
-print("NAT T Local: ", us_NAT_T)
-print("NAT T Remote: ", remote_NAT_T)
-print("localAuthentication: ", localAuthentication)
-print("proposal_number_phase_2: ", proposal_number_phase_2)
-print("authenticationPeerType: ", peerAuthenticationType)
-print("peerAuthenticationComplete: ", peerAuthenticationComplete)
-print("idleTimeout: ", idleTimeout)
-print("sessionTimeout: ", sessionTimeout)
-print("nameGroupPolicy: ", nameGroupPolicy)
-print("DPDtimer: ", DPDtimer)
-#print("cryptoMapSecuence: ", cryptoMapSecuence)
-print("I_SPI: ", I_SPI)
-print("R_SPI: ", R_SPI)
-print("tunelUp: ", tunelUp)
-print("phase_1: ", phase_1)
-
 
 def filterProposal(match_start, match_end):
     debug_file = open(filePath)
@@ -187,62 +158,54 @@ else:
 if(len(agreed_sa_remote) == 0):
     agreed_sa_remote = [remote_sa_sent[-1]]
 
-print("=========================")
-print("PROPOSALS SENT FROM INITIATOR")
-print("=========================")
+result = {
+    "iniciator": iniciator,
+    "peer": peer,
+    "proposalType": proposalType,
+    "tunnelType": tunnelType,
+    "proposal_phase_1": proposal_phase_1,
+    "protocol_phase_1": protocol_phase_1,
+    "phase_1": phase_1,
+    "noNATfound": noNATfound,
+    "us NAT T": us_NAT_T,
+    "remote_NAT_T": remote_NAT_T,
+    "localAuthentication": localAuthentication,
+    "proposal_number_phase_2": proposal_number_phase_2,
+    "peerAuthenticationType": peerAuthenticationType,
+    "peerAuthenticationComplete": peerAuthenticationComplete,
+    "idleTimeout": idleTimeout,
+    "sessionTimeout": sessionTimeout,
+    "nameGroupPolicy": nameGroupPolicy,
+    "DPDtimer": DPDtimer,
+    "I_SPI": I_SPI,
+    "R_SPI": R_SPI,
+    "tunelUp": tunelUp,
+    ## PROPOSALS SENT FROM INITIATOR
+    "p1_proposal": p1_proposal,
+    "p1_proposal_encryption": p1_proposal_encryption,
+    "p1_proposal_prf": p1_proposal_prf,
+    "p1_proposal_integrity": p1_proposal_integrity,
+    "p1_proposal_group": p1_proposal_group,
+    ## RESPONSE FROM RESPONDER
+    "p1_proposal_resp": p1_proposal_resp,
+    "p1_proposal_encryption_resp": p1_proposal_encryption_resp,
+    "p1_proposal_prf_resp": p1_proposal_prf_resp,
+    "p1_proposal_integrity_resp": p1_proposal_integrity_resp,
+    "p1_proposal_group_resp": p1_proposal_group_resp,
+    ## Phase 2 Proposals
+    "p2_proposal": p2_proposal,
+    "p2_proposal_encryption": p2_proposal_encryption,
+    "p2_proposal_hash": p2_proposal_hash,
+    "p1_proposal_integrity_resp": p1_proposal_integrity_resp,
+    "p2_proposal_esn": p2_proposal_esn,
+    ## Interesting Traffic Local  Sent
+    "local_sa_sent": local_sa_sent,
+    ## Interesting Traffic Remote  Sent
+    "remote_sa_sent": remote_sa_sent,
+    ## AGREED INTERSTING TRAFFIC
+    "agreed_sa_local": agreed_sa_local,
+    "agreed_sa_remote": agreed_sa_remote
+}
 
-print(p1_proposal)
-print(p1_proposal_encryption)
-print(p1_proposal_prf)
-print(p1_proposal_integrity)
-print(p1_proposal_group)
-
-print("=========================")
-print("RESPONSE FROM RESPONDER")
-print("=========================")
-
-print(p1_proposal_resp)
-print(p1_proposal_encryption_resp)
-print(p1_proposal_prf_resp)
-print(p1_proposal_integrity_resp)
-print(p1_proposal_group_resp)
-
-
-print("=========================")
-print("Phase 2 Proposals")
-print("=========================")
-
-print(p2_proposal)
-print(p2_proposal_encryption)
-print(p2_proposal_hash)
-print(p1_proposal_integrity_resp)
-print(p2_proposal_esn)
-
-
-print("=========================")
-print("---   Interesting Traffic Local  Sent   ---")
-print("=========================")
-
-
-print(local_sa_sent)
-
-
-print("=========================")
-print("---   Interesting Traffic Remote  Sent   ---")
-print("=========================")
-
-print(remote_sa_sent)
-
-
-print("=========================")
-print("---   AGREED INTERSTING TRAFFIC   ---")
-print("=========================")
-
-
-print("Local SA :" , agreed_sa_local)
-print("Remote SA :" , agreed_sa_remote)
-
-#dici = [['\n'+'Your initial configuration is :'+'\n']]
-#functions.conf_ini(initiator,filters,dici)
-#for row in dici:
-#    lambdas.cprint(row)
+def infoExtractor(result):
+    return result
