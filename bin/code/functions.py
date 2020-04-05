@@ -27,3 +27,13 @@ def checkNotFound(log):
     except Exception as e:
         if (e == 'NoneType'):
             return "Not Found"
+
+def checkNotFoundArray(array):
+    try:
+        if(len(array) != 0):
+            return array
+        else:
+            return "Not found"
+    except Exception as e:
+        if (e == 'NoneType'):
+            return "Not Found"

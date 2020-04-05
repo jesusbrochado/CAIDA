@@ -5,20 +5,20 @@ from code import lambdas, functions
 import re
 
 ## DECLARATIONS
-filePath = '../pub/debugs/userLog2.txt'
+filePath = '../pub/debugs/userlog2.txt'
 userLog = lambdas.readDebugs(filePath) # is constant for now!!!
 filters = lambdas.csvToDict('logs_init.csv')
-
+TXTNoFound = "Not found"
 
 # Here we extract key data from the string get userLog that user enter to the system.
 iniciator = True if re.search(r'EV_INIT_SA',userLog) else  False
 
-if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != "Not Found")):
+if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != TXTNoFound)):
     peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
 else:
     peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))
 
-if((functions.checkNotFound(re.search('my_auth_method = (.+?)\n', userLog) != "Not Found"))):
+if((functions.checkNotFound(re.search('my_auth_method = (.+?)\n', userLog) != TXTNoFound))):
     proposalType = "PSK" if re.search('my_auth_method = (.+?)\n', userLog).group(1) == 2 else "PKI"
 else:
     proposalType = functions.checkNotFound(re.search('My authentication method is (.+?)\n', userLog))
@@ -36,7 +36,7 @@ protocol_phase_1 = functions.checkNotFound(re.search('Protocol id: (.+?), SPI', 
 phase_1 = True if re.search(r'\(I\) MsgID = 00000000 CurState: INIT_DONE Event: EV_CHK4_ROLE',userLog) else  False
 
 # NAT Detection
-noNATfound = True if re.search(r'No NAT found',userLog) else  False
+noNATfound = "No NAT found" if re.search(r'No NAT found',userLog) else  False
 us_NAT_T = True if re.search(r'NAT INSIDE found',userLog) else  False
 remote_NAT_T = True if re.search(r'NAT OUTSIDE found',userLog) else  False
 
@@ -68,8 +68,8 @@ sessionTimeout = functions.checkNotFound(re.search('session timeout set to: (.+?
 nameGroupPolicy = functions.checkNotFound(re.search('group policy set to (.+?)\n', userLog))
 DPDtimer = functions.checkNotFound(re.search('Initializing DPD, configured for (.+?) seconds', userLog))
 
-cryptoMapName = re.search('PROXY MATCH on crypto map (.+?) s', userLog).group(1)
-cryptoMapSecuence = re.search('PROXY MATCH on crypto map '+ cryptoMapName + ' seq (.+?)\n', userLog).group(1)
+cryptoMapName = functions.checkNotFound(re.search('PROXY MATCH on crypto map (.+?) s', userLog))
+cryptoMapSecuence = functions.checkNotFound(re.search('PROXY MATCH on crypto map '+ cryptoMapName + ' seq (.+?)\n', userLog))
 I_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', userLog))
 ## Add ignore some value for regex
 R_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog))
@@ -92,7 +92,7 @@ def filterProposal(match_start, match_end):
             i = i + 1
         return p1_prop_string
     except Exception:
-        pass
+        return TXTNoFound
 
 #EXTRAER EN ARCHIVOS PEQUENIOS
 p1_prop_string = filterProposal('Protocol id: IKE, SPI size: ', 'Next payload: VID')
@@ -107,38 +107,38 @@ sa_traffic_agreed_local= filterProposal('TSi  Next payload: TSr', ' TSr  Next pa
 sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: I_WAIT_AUTH Event: EV_RECV_AUTH')
 
 #LOAD PHASE 1 SENT
-p1_proposal = re.findall('Proposal: (.+?)', p1_prop_string)
-p1_proposal_encryption = re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_prop_string)
-p1_proposal_prf = re.findall('type: 2, reserved: 0x0, id: (.+?)\n', p1_prop_string)
-p1_proposal_integrity = re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p1_prop_string)
-p1_proposal_group = re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_prop_string)
+p1_proposal = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_prop_string))
+p1_proposal_encryption = functions.checkNotFoundArray(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_prop_string))
+p1_proposal_prf = functions.checkNotFoundArray(re.findall('type: 2, reserved: 0x0, id: (.+?)\n', p1_prop_string))
+p1_proposal_integrity = functions.checkNotFoundArray(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p1_prop_string))
+p1_proposal_group = functions.checkNotFoundArray(re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_prop_string))
 
 #LOAD PHASE 1 RESP
-p1_proposal_resp = re.findall('Proposal: (.+?)', p1_resp)
-p1_proposal_encryption_resp = re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_resp)
-p1_proposal_prf_resp = re.findall('type: 2, reserved: 0x0, id: (.+?)\n', p1_resp)
-p1_proposal_integrity_resp = re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p1_resp)
-p1_proposal_group_resp = re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_resp)
+p1_proposal_resp = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_resp))
+p1_proposal_encryption_resp = functions.checkNotFoundArray(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_resp))
+p1_proposal_prf_resp = functions.checkNotFoundArray( re.findall('type: 2, reserved: 0x0, id: (.+?)\n', p1_resp))
+p1_proposal_integrity_resp = functions.checkNotFoundArray(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p1_resp))
+p1_proposal_group_resp = functions.checkNotFoundArray(re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_resp))
 
 #LOAD PHASE 2
-if (p2_prop is not None): # flag p2_prop a veces llega None????
-    p2_proposal = functions.checkNotFound(re.findall('Proposal: (.+?)', p2_prop))
-    p2_proposal_encryption =functions.checkNotFound(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p2_prop))
-    p2_proposal_hash = functions.checkNotFound(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p2_prop))
-    p2_proposal_esn = functions.checkNotFound(re.findall('type: 5, reserved: 0x0, id: (.+?)\n', p2_prop))
+if (p2_prop is not None and p2_prop != TXTNoFound):
+    p2_proposal = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p2_prop))
+    p2_proposal_encryption =functions.checkNotFoundArray(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p2_prop))
+    p2_proposal_hash = functions.checkNotFoundArray(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p2_prop))
+    p2_proposal_esn = functions.checkNotFoundArray(re.findall('type: 5, reserved: 0x0, id: (.+?)\n', p2_prop))
 else:
-    p2_proposal = "Not Found"
-    p2_proposal_encryption = "Not Found"
-    p2_proposal_hash = "Not Found"
-    p2_proposal_esn = "Not Found"
+    p2_proposal = TXTNoFound
+    p2_proposal_encryption = TXTNoFound
+    p2_proposal_hash = TXTNoFound
+    p2_proposal_esn = TXTNoFound
 
 #INTERSTING TRAFFIC
-local_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_local)
+local_sa_sent = functions.checkNotFoundArray(re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_local))
 
-if(sa_traffic_init_remote is not None): # flag este valor a vece llega como None????
+if(sa_traffic_init_remote is not None and sa_traffic_init_remote != TXTNoFound):
     remote_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_remote)
 else:
-    remote_sa_sent = "Not Found"
+    remote_sa_sent = TXTNoFound
 
 
 # Si sa_traffic_agreed_local y/o sa_traffic_agreed_remote estan vacios,entonces utilizar
@@ -148,15 +148,15 @@ else:
 
 agreed_sa_local = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_local)
 if (len(agreed_sa_local) == 0):
-    agreed_sa_local = [local_sa_sent[-1]]
+    agreed_sa_local = [local_sa_sent[-1]] if len(local_sa_sent) > 0 else TXTNoFound
 
 if (sa_traffic_agreed_remote is not None):
     agreed_sa_remote = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_remote)
 else:
-    agreed_sa_remote = "Not Found"
+    agreed_sa_remote = TXTNoFound
 
 if(len(agreed_sa_remote) == 0):
-    agreed_sa_remote = [remote_sa_sent[-1]]
+    agreed_sa_remote = [remote_sa_sent[-1]] if len(remote_sa_sent) > 0 else TXTNoFound
 
 fase1 = {
     "Are we initiators": iniciator,
