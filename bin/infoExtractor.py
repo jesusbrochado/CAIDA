@@ -26,7 +26,7 @@ else:
 
 #tunnelType = re.search('tunn grp type set to: (.+?)\n', userLog).group(1) #"site to site by default, si encuentre entonces el string que encuentre"
 if (re.search('tunn grp type set to: (.+?)\n', userLog) is not None):
-    tunnelType = re.search('tunn grp type set to: (.+?)\n', userLog)
+    tunnelType = re.search('tunn grp type set to: (.+?)\n', userLog).group(1)
 else:
     tunnelType = "site to site"
 
@@ -67,8 +67,9 @@ idleTimeout = functions.checkNotFound(re.search('idle timeout set to: (.+?)\n', 
 sessionTimeout = functions.checkNotFound(re.search('session timeout set to: (.+?)\n', userLog))
 nameGroupPolicy = functions.checkNotFound(re.search('group policy set to (.+?)\n', userLog))
 DPDtimer = functions.checkNotFound(re.search('Initializing DPD, configured for (.+?) seconds', userLog))
-#PENDING!
-#cryptoMapSecuence = re.search('PROXY MATCH on crypto map (.+?) seq (.+?)\n', userLog).group(1)
+
+cryptoMapName = re.search('PROXY MATCH on crypto map (.+?) s', userLog).group(1)
+cryptoMapSecuence = re.search('PROXY MATCH on crypto map '+ cryptoMapName + ' seq (.+?)\n', userLog).group(1)
 I_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', userLog))
 ## Add ignore some value for regex
 R_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog))
@@ -122,7 +123,7 @@ p1_proposal_group_resp = re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_re
 #LOAD PHASE 2
 if (p2_prop is not None): # flag p2_prop a veces llega None????
     p2_proposal = functions.checkNotFound(re.findall('Proposal: (.+?)', p2_prop))
-    p2_proposal_encryption =functions.checkNotFound( re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p2_prop))
+    p2_proposal_encryption =functions.checkNotFound(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p2_prop))
     p2_proposal_hash = functions.checkNotFound(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p2_prop))
     p2_proposal_esn = functions.checkNotFound(re.findall('type: 5, reserved: 0x0, id: (.+?)\n', p2_prop))
 else:
@@ -132,7 +133,6 @@ else:
     p2_proposal_esn = "Not Found"
 
 #INTERSTING TRAFFIC
-
 local_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_local)
 
 if(sa_traffic_init_remote is not None): # flag este valor a vece llega como None????
@@ -158,53 +158,63 @@ else:
 if(len(agreed_sa_remote) == 0):
     agreed_sa_remote = [remote_sa_sent[-1]]
 
-result = {
-    "iniciator": iniciator,
-    "peer": peer,
-    "proposalType": proposalType,
-    "tunnelType": tunnelType,
-    "proposal_phase_1": proposal_phase_1,
-    "protocol_phase_1": protocol_phase_1,
-    "phase_1": phase_1,
-    "noNATfound": noNATfound,
-    "us NAT T": us_NAT_T,
-    "remote_NAT_T": remote_NAT_T,
-    "localAuthentication": localAuthentication,
-    "proposal_number_phase_2": proposal_number_phase_2,
+fase1 = {
+    "Are we initiators": iniciator,
+    "Peer": peer,
+    # Revisar por que extraimos esto, parece que se corrompio
+    # "Phase 1 proposals": proposal_phase_1,
+    "Authentication Method": proposalType,
+    "Tunnel Type": tunnelType,
+    "Protocol Used": protocol_phase_1,
+    "Phase 1 completed": phase_1,
+    "Only UDP 500 (No NAT T)": noNATfound,
+    "We are behind NAT": us_NAT_T,
+    "Remote end behind NAT": remote_NAT_T,
+    "Local Authnetication": localAuthentication,
     "peerAuthenticationType": peerAuthenticationType,
     "peerAuthenticationComplete": peerAuthenticationComplete,
-    "idleTimeout": idleTimeout,
-    "sessionTimeout": sessionTimeout,
-    "nameGroupPolicy": nameGroupPolicy,
-    "DPDtimer": DPDtimer,
-    "I_SPI": I_SPI,
-    "R_SPI": R_SPI,
-    "tunelUp": tunelUp,
+
     ## PROPOSALS SENT FROM INITIATOR
-    "p1_proposal": p1_proposal,
-    "p1_proposal_encryption": p1_proposal_encryption,
-    "p1_proposal_prf": p1_proposal_prf,
-    "p1_proposal_integrity": p1_proposal_integrity,
-    "p1_proposal_group": p1_proposal_group,
+    ## Estos son todos los que enviamos, por ahora no se van a mostrar en GUI debeido a que son vectores
+    #"p1_proposal": p1_proposal,
+    #"p1_proposal_encryption": p1_proposal_encryption,
+    #"p1_proposal_prf": p1_proposal_prf,
+    #"p1_proposal_integrity": p1_proposal_integrity,
+    #"p1_proposal_group": p1_proposal_group,
     ## RESPONSE FROM RESPONDER
-    "p1_proposal_resp": p1_proposal_resp,
-    "p1_proposal_encryption_resp": p1_proposal_encryption_resp,
-    "p1_proposal_prf_resp": p1_proposal_prf_resp,
-    "p1_proposal_integrity_resp": p1_proposal_integrity_resp,
-    "p1_proposal_group_resp": p1_proposal_group_resp,
+    #"p1_proposal_resp": p1_proposal_resp,
+    "Agreed encryption": p1_proposal_encryption_resp,
+    "Agreed PRF group": p1_proposal_prf_resp,
+    "Agreed hashing": p1_proposal_integrity_resp,
+    "Agreed DH Group": p1_proposal_group_resp,
+
+}
+
+
+fase2 = {
+    "Amount of Phase 2 proposals sent": proposal_number_phase_2,
     ## Phase 2 Proposals
     "p2_proposal": p2_proposal,
     "p2_proposal_encryption": p2_proposal_encryption,
     "p2_proposal_hash": p2_proposal_hash,
-    "p1_proposal_integrity_resp": p1_proposal_integrity_resp,
     "p2_proposal_esn": p2_proposal_esn,
     ## Interesting Traffic Local  Sent
-    "local_sa_sent": local_sa_sent,
+    "Local encryption domain": local_sa_sent,
     ## Interesting Traffic Remote  Sent
-    "remote_sa_sent": remote_sa_sent,
+    "Remote encryption domain": remote_sa_sent,
     ## AGREED INTERSTING TRAFFIC
-    "agreed_sa_local": agreed_sa_local,
-    "agreed_sa_remote": agreed_sa_remote
+    "Agreed SA Local": agreed_sa_local,
+    "Agreed SA Remote": agreed_sa_remote
+}
+
+misc = {
+    "Idle Timeout": idleTimeout,
+    "Session Timeout": sessionTimeout,
+    "Matched Group-Policy": nameGroupPolicy,
+    "DPD Timer": DPDtimer,
+    "Initiator SPI": I_SPI,
+    "Responder SPI": R_SPI,
+    "Tunnel established!": tunelUp,
 }
 
 def infoExtractor(result):
