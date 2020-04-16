@@ -73,20 +73,20 @@ class Application(ttk.Frame):
 
 
             #Frame center right
-            self.frCenterRight = tk.Frame(self,bg="red")
-            self.frCenterRight.grid(row=1, column=2, sticky="nsew", padx=10)
+            self.frCenterRight = tk.Frame(self,bg="#f4f7ff")
+            self.frCenterRight.grid(row=1, column=2, sticky="nsew")
             self.frCenterRight.grid_columnconfigure(2, minsize=340, weight=1)
             self.frCenterRight.grid_propagate(False)
            
-            #self.lblTitle2 = tk.Label(self.frCenterRight,bg="#73e8fa", text="Phase 2 Initial Configuration", font=("Georgia", 12))
-            #self.lblTitle2.grid(row=1, column=2, sticky="nsew", ipady=3, padx=10)
-            #self.lblTitle2.grid_rowconfigure(1, weight=1)
-            #self.frCenterRight.grid_rowconfigure(1, weight=1)
+            self.lblTitle2 = tk.Label(self.frCenterRight,bg="#73e8fa", text="Phase 2 Initial Configuration", font=("Georgia", 12))
+            self.lblTitle2.grid(row=1, column=2, sticky="nsew", ipady=3, padx=10)
+            self.lblTitle2.grid_rowconfigure(1, weight=1)
+            self.frCenterRight.grid_rowconfigure(1, weight=1)
 
-            #self.lblPhase2 = tk.Label(self.frCenterRight,bg="#ffffff", text="aqui va la configuracion inicial fase 3", font=("Georgia", 12))
-            #self.lblPhase2.grid(row=2, column=2, sticky="nsew", ipady=3, padx=10)
-            #self.lblPhase2.grid_rowconfigure(2, weight=5)
-            #self.frCenterRight.grid_rowconfigure(2, weight=20)
+            self.lblPhase2 = tk.Label(self.frCenterRight,bg="#ffffff", text="aqui va la configuracion inicial fase 3", font=("Georgia", 12))
+            self.lblPhase2.grid(row=2, column=2, sticky="nsew", ipady=3, padx=10)
+            self.lblPhase2.grid_rowconfigure(2, weight=5)
+            self.frCenterRight.grid_rowconfigure(2, weight=20)
 
             
             #Frame Bot
