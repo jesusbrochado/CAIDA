@@ -159,20 +159,20 @@ if(len(agreed_sa_remote) == 0):
     agreed_sa_remote = [remote_sa_sent[-1]] if len(remote_sa_sent) > 0 else TXTNoFound
 
 fase1 = {
-    "Are we initiators": iniciator,
-    "Peer": peer,
+    "Are we initiators: ": iniciator,
+    "Peer: ": peer,
     # Revisar por que extraimos esto, parece que se corrompio
     # "Phase 1 proposals": proposal_phase_1,
-    "Authentication Method": proposalType,
-    "Tunnel Type": tunnelType,
-    "Protocol Used": protocol_phase_1,
-    "Phase 1 completed": phase_1,
-    "Only UDP 500 (No NAT T)": noNATfound,
-    "We are behind NAT": us_NAT_T,
-    "Remote end behind NAT": remote_NAT_T,
-    "Local Authnetication": localAuthentication,
-    "peerAuthenticationType": peerAuthenticationType,
-    "peerAuthenticationComplete": peerAuthenticationComplete,
+    "Authentication Method: ": proposalType,
+    "Tunnel Type: ": tunnelType,
+    "Protocol Used: ": protocol_phase_1,
+    "Phase 1 completed: ": phase_1,
+    "Only UDP 500 (No NAT T): ": noNATfound,
+    "We are behind NAT: ": us_NAT_T,
+    "Remote end behind NAT: ": remote_NAT_T,
+    "Local Authnetication: ": localAuthentication,
+    "peerAuthenticationType: ": peerAuthenticationType,
+    "peerAuthenticationComplete: ": peerAuthenticationComplete,
 
     ## PROPOSALS SENT FROM INITIATOR
     ## Estos son todos los que enviamos, por ahora no se van a mostrar en GUI debeido a que son vectores
@@ -183,38 +183,38 @@ fase1 = {
     #"p1_proposal_group": p1_proposal_group,
     ## RESPONSE FROM RESPONDER
     #"p1_proposal_resp": p1_proposal_resp,
-    "Agreed encryption": p1_proposal_encryption_resp,
-    "Agreed PRF group": p1_proposal_prf_resp,
-    "Agreed hashing": p1_proposal_integrity_resp,
-    "Agreed DH Group": p1_proposal_group_resp,
+    "Agreed encryption: ": p1_proposal_encryption_resp,
+    "Agreed PRF group: ": p1_proposal_prf_resp,
+    "Agreed hashing: ": p1_proposal_integrity_resp,
+    "Agreed DH Group: ": p1_proposal_group_resp,
 
 }
 
 
 fase2 = {
-    "Amount of Phase 2 proposals sent": proposal_number_phase_2,
+    "Amount of Phase 2 proposals sent: ": proposal_number_phase_2,
     ## Phase 2 Proposals
-    "p2_proposal": p2_proposal,
-    "p2_proposal_encryption": p2_proposal_encryption,
-    "p2_proposal_hash": p2_proposal_hash,
-    "p2_proposal_esn": p2_proposal_esn,
+    "p2_proposal: ": p2_proposal,
+    "p2_proposal_encryption: ": p2_proposal_encryption,
+    "p2_proposal_hash: ": p2_proposal_hash,
+    "p2_proposal_esn: ": p2_proposal_esn,
     ## Interesting Traffic Local  Sent
-    "Local encryption domain": local_sa_sent,
+    "Local encryption domain: ": local_sa_sent,
     ## Interesting Traffic Remote  Sent
-    "Remote encryption domain": remote_sa_sent,
+    "Remote encryption domain: ": remote_sa_sent,
     ## AGREED INTERSTING TRAFFIC
-    "Agreed SA Local": agreed_sa_local,
-    "Agreed SA Remote": agreed_sa_remote
+    "Agreed SA Local: ": agreed_sa_local,
+    "Agreed SA Remote: ": agreed_sa_remote
 }
 
 misc = {
-    "Idle Timeout": idleTimeout,
-    "Session Timeout": sessionTimeout,
-    "Matched Group-Policy": nameGroupPolicy,
-    "DPD Timer": DPDtimer,
-    "Initiator SPI": I_SPI,
-    "Responder SPI": R_SPI,
-    "Tunnel established!": tunelUp,
+    "Idle Timeout: ": idleTimeout,
+    "Session Timeout: ": sessionTimeout,
+    "Matched Group-Policy: ": nameGroupPolicy,
+    "DPD Timer: ": DPDtimer,
+    "Initiator SPI: ": I_SPI,
+    "Responder SPI: ": R_SPI,
+    "Tunnel established!: ": tunelUp,
 }
 
 def infoExtractor(result):

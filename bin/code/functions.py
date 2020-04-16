@@ -37,3 +37,7 @@ def checkNotFoundArray(array):
     except Exception as e:
         if (e == 'NoneType'):
             return "Not Found"
+            
+def UploadAction(event=None):
+    filename = filedialog.askopenfilename()
+    print('Selected:', filename)
