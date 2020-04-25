@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 from tkinter import filedialog
-from code import lambdas
+import lambdas
 def conf_ini(initiator, filters, dici):
     for key in filters.keys():
         for words in initiator:
@@ -40,5 +40,5 @@ def checkNotFoundArray(array):
             
 def UploadAction(event=None):
     filename = filedialog.askopenfilename()
-    print('Selected: &&&&&&', filename)
+    print('Selected: ', filename)
     return filename

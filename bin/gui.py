@@ -2,13 +2,13 @@
 # encoding: utf-8
 #Imports
 import tkinter as tk
-from tkinter import ttk, Entry
-from code import functions, lambdas
+from tkinter import ttk, Entry, filedialog
+#from code import functions, lambdas
+import functions, lambdas
 import infoExtractor
-from infoExtractor import fase1, fase2, misc
-filePath = '../pub/debugs/userlog2.txt'
-userLog = lambdas.readDebugs(filePath)
+from infoExtractor import extractor
 
+res = [{}, {}, {}] 
 class Application(ttk.Frame):
         def __init__(self, main_window):
             super().__init__(main_window)
@@ -122,6 +122,12 @@ class Application(ttk.Frame):
 
             
         def run(self):
+            filePath = filedialog.askopenfilename()
+            res = extractor(filePath)
+            fase1 = res[0]
+            fase2 = res[1]
+            misc = res[2]
+
             #Print phase1, phase2 and misc in Gui
             self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in fase1.items())
             self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in misc.items())
