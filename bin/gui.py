@@ -9,7 +9,6 @@ import infoExtractor
 from infoExtractor import extractor
 from tkinter import LEFT
 
-res = [{}, {}, {}] 
 class Application(ttk.Frame):
         def __init__(self, main_window):
             super().__init__(main_window)
@@ -20,6 +19,10 @@ class Application(ttk.Frame):
             main_window.minsize(width=1200, height=650)
             main_window['bg']='green'
 
+            res = [{}, {}, {}]
+            self.fase1 = res[0]
+            self.fase2 = res[1]
+            self.misc = res[2]
             
             #Frame top
             frTop = tk.Frame(self,bg="#f4f7ff",width=120, height=80)
@@ -30,7 +33,7 @@ class Application(ttk.Frame):
             enImport.grid(row=0, column=0, sticky="ew", ipady=5, padx=10, ipadx=10)
             frTop.grid_columnconfigure(0, weight=8)
             
-            btnImport = tk.Button(frTop, bg="#ffffff", text="Importar", command=functions.UploadAction,font=("Georgia", 12))
+            btnImport = tk.Button(frTop, bg="#ffffff", text="Save", command=self.exportTxt,font=("Georgia", 12))
             btnImport.grid(row=0, column=1, sticky="ew", ipady=3, padx=10)
             frTop.grid_columnconfigure(1, weight=1)
             
@@ -159,17 +162,30 @@ class Application(ttk.Frame):
             self.rowconfigure(2, weight=7)
             self.columnconfigure(2, weight=1)
 
+        def exportTxt(self):
+            ftypes = [('Postscript files', '.txt'), ('All files', '*')]
+            filePath = filedialog.asksaveasfilename(initialfile = 'caida-output',filetypes=ftypes, defaultextension='.txt')
+            f= open(filePath,"w+")
+
+            f.write("======================================== \n==== Phase 1 \n========================================\n")
+            f.write('\n'.join('{} {}'.format(k, d) for k, d in self.fase1.items()))
+            f.write("\n\n======================================== \n==== Phase 2 \n========================================\n")
+            f.write('\n'.join('{} {}'.format(k, d) for k, d in self.misc.items()))
+            f.write("\n\n======================================== \n==== Misc \n========================================\n")
+            f.write('\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items()))
+            f.close()
+
         def run(self):
             filePath = filedialog.askopenfilename()
             res = extractor(filePath)
-            fase1 = res[0]
-            fase2 = res[1]
-            misc = res[2]
+            self.fase1 = res[0]
+            self.fase2 = res[1]
+            self.misc = res[2]
 
             #Print phase1, phase2 and misc in Gui
-            self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in fase1.items())
-            self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in misc.items())
-            self.lblPhase2['text'] = '\n'.join('{} {}'.format(k, d) for k, d in fase2.items())
+            self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase1.items())
+            self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.misc.items())
+            self.lblPhase2['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items())
 
 
 

@@ -128,12 +128,12 @@ def extractor(filePath):
 
     # tart addr: 172.16.0.20, end addr: 172.16.0.20
 
-    agreed_sa_local = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_local)
+    agreed_sa_local = functions.checkNotFoundArray(re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_local))
     if (len(agreed_sa_local) == 0):
         agreed_sa_local = [local_sa_sent[-1]] if len(local_sa_sent) > 0 else TXTNoFound
 
     if (sa_traffic_agreed_remote is not None):
-        agreed_sa_remote = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_remote)
+        agreed_sa_remote = functions.checkNotFoundArray(re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_agreed_remote))
     else:
         agreed_sa_remote = TXTNoFound
 
@@ -181,12 +181,12 @@ def extractor(filePath):
         "p2_proposal_hash: ": p2_proposal_hash,
         "p2_proposal_esn: ": p2_proposal_esn,
         ## Interesting Traffic Local  Sent
-        "Local encryption domain: ": local_sa_sent,
+        "Local encryption domain: ": local_sa_sent[0][0] if local_sa_sent !=  "Not found" else "Not found",
         ## Interesting Traffic Remote  Sent
-        "Remote encryption domain: ": remote_sa_sent,
+        "Remote encryption domain: ": remote_sa_sent[0][1] if remote_sa_sent !=  "Not found" else "Not found",
         ## AGREED INTERSTING TRAFFIC
-        "Agreed SA Local: ": agreed_sa_local,
-        "Agreed SA Remote: ": agreed_sa_remote
+        "Agreed SA Local: ": agreed_sa_local[0][0] if agreed_sa_local !=  "Not found" else "Not found",
+        "Agreed SA Remote: ": agreed_sa_remote[0][1] if agreed_sa_remote !=  "Not found" else "Not found"
     }
 
     misc = {
