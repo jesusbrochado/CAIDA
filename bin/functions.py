@@ -37,6 +37,17 @@ def checkNotFoundArray(array):
     except Exception as e:
         if (e == 'NoneType'):
             return "Not Found"
+
+def checkNotFoundCase(log):
+    try:
+        if not (log is None):
+            return True
+            #return log.group(0)
+        else:
+            return False
+    except Exception as e:
+        if (e == 'NoneType'):
+            return False
             
 def UploadAction(event=None):
     filename = filedialog.askopenfilename()

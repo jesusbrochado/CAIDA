@@ -63,7 +63,7 @@ class Application(ttk.Frame):
             self.frCenterLeftContent = tk.Frame(self.cvCenterLeft, bg="white")
             self.cvCenterLeft.create_window((0,0), window=self.frCenterLeftContent, anchor="nw")
 
-            self.lblTitle1 = tk.Label(self.frCenterLeft,bg="#73e8fa", text="phase 1", font=("Georgia", 12))
+            self.lblTitle1 = tk.Label(self.frCenterLeft,bg="#73e8fa", text="Phase 1", font=("Georgia", 12))
             self.lblTitle1.grid(row=0, column=0, sticky="nsew", ipady=3, padx=(10,0))
             self.frCenterLeft.grid_rowconfigure(1, weight=5)
 
@@ -123,7 +123,7 @@ class Application(ttk.Frame):
             self.frCenterRightContent = tk.Frame(self.cvCenterRight, bg="white")
             self.cvCenterRight.create_window((0,0), window=self.frCenterRightContent, anchor="nw")
 
-            self.lblTitle0 = tk.Label(self.frCenterRight,bg="#73e8fa", text="misc", font=("Georgia", 12))
+            self.lblTitle0 = tk.Label(self.frCenterRight,bg="#73e8fa", text="Misc", font=("Georgia", 12))
             self.lblTitle0.grid(row=0, column=0, sticky="nsew", ipady=3)
             self.frCenterRight.grid_rowconfigure(1, weight=5)
 
@@ -149,7 +149,7 @@ class Application(ttk.Frame):
             frBotBot.grid_rowconfigure(3, weight=1)
             frBotBot.grid_columnconfigure(1, weight=1)
             
-            lblMssge = tk.Label(frBotBot,bg="#ffffff", text="Informacion sobre el status de la ejecucion ...",font=("Georgia", 10))
+            lblMssge = tk.Label(frBotBot,bg="#ffffff", text="Place holder",font=("Georgia", 10))
             lblMssge.grid(row=3, column=1, sticky="ew")
             lblMssge.grid_rowconfigure(3, weight=1)
 

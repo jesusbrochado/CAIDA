@@ -181,12 +181,12 @@ def extractor(filePath):
         "p2_proposal_hash: ": p2_proposal_hash,
         "p2_proposal_esn: ": p2_proposal_esn,
         ## Interesting Traffic Local  Sent
-        "Local encryption domain: ": local_sa_sent[0][0] if local_sa_sent !=  "Not found" else "Not found",
+        "Local remote trigger IP: ": local_sa_sent[0][0] if local_sa_sent !=  "Not found" else "Not found",
         ## Interesting Traffic Remote  Sent
-        "Remote encryption domain: ": remote_sa_sent[0][1] if remote_sa_sent !=  "Not found" else "Not found",
+        "Remote remote trigger IP: ": remote_sa_sent[0][1] if remote_sa_sent !=  "Not found" else "Not found",
         ## AGREED INTERSTING TRAFFIC
-        "Agreed SA Local: ": agreed_sa_local[0][0] if agreed_sa_local !=  "Not found" else "Not found",
-        "Agreed SA Remote: ": agreed_sa_remote[0][1] if agreed_sa_remote !=  "Not found" else "Not found"
+        "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[0][0], agreed_sa_local[0][1]) if agreed_sa_local !=  "Not found" else "Not found",
+        "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[0][0], agreed_sa_remote[0][1]) if agreed_sa_remote !=  "Not found" else "Not found"
     }
 
     misc = {
