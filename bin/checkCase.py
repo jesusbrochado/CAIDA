@@ -85,7 +85,7 @@ class CheckCase():
 
         return message
 
-ch = CheckCase('../pub/debugs/iniciator.txt')
-ch.extractInfo()
+# ch = CheckCase('../pub/debugs/iniciator.txt')
+# ch.extractInfo()
 
-print(ch.extractInfo())
+# print(ch.extractInfo())
