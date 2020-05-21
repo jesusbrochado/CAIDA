@@ -26,6 +26,9 @@ class CheckCase():
         l11923 = functions.checkNotFoundCase(re.search('Abort exchange', userLog))
         l13065 = functions.checkNotFoundCase(re.search('I_SPI=DCA635040E30A6A3 R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT', userLog))
         l13066 = functions.checkNotFoundCase(re.search('Retransmitting packet', userLog))
+        l13128 = functions.checkNotFoundCase(re.search('Received Policies', userLog))
+        l13129 = functions.checkNotFoundCase(re.search('Failed to find a matching policy', userLog))
+        l13130 = functions.checkNotFoundCase(re.search('Expected Policies', userLog))
 
         logs = {
             "10001": l10001,
@@ -43,23 +46,46 @@ class CheckCase():
             "11922": l11922,
             "11923": l11923,
             "13065": l13065,
-            "13066": l13066
+            "13066": l13066,
+            "13128": l13128,
+            "13129": l13129,
+            "13130": l13130,
         }
 
+        message = ""
 
-        if(logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"]):
-            print("Remote end sent no proposal chosen, verify phase 1 policies match")
-        elif(logs["11003"] and logs["11008"] and logs["11917"] and logs["11918"]):
-            print("tunnel-group for peer x.x.x.x missing keys") # Replace X for the true value
-        elif(logs["11003"] and logs["11917"] and logs["11918"]):
-            print("tunnel-group for peer x.x.x.x missing keys")
-        elif(logs["13065"] and logs["13966"]):
-            print("Remote end not replying to UDP 500 init message, possible device in betwen blocking comunication or remote end configure for the wrong peer")
-        elif(logs["11904"] and logs["11907"]):
-            print("Tunnel-group not configured, verify there is a tunnel-group configured for IP x.x.x.x") # Replace X for the true value
-        elif(logs["10001"]):
-            print("Is initiator")
+        if logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"]:
+            message = "Remote end sent no proposal chosen, verify phase 1 policies match"
+        elif logs["11003"] and logs["11008"] and logs["11917"] and logs["11918"]:
+            message = "tunnel-group for peer x.x.x.x missing keys" # Replace X for the true value
+        elif logs["13128"] and logs["13129"] and logs["13130"]:
+            compare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog).group(0)
+            compare1 = re.search('Proposal 1:  (.+?)\n', compare1).group(1)
+            compare1 = compare1.split(" ")
+            compare2 = re.search('Expected Policies:\nProposal 1:  (.+?)\n', userLog).group(0)
+            compare2 = re.search('Proposal 1:  (.+?)\n', compare2).group(1)
+            compare2 = compare2.split(" ")
 
+            if compare1[0] != compare2[0]:
+                message = "ENCRYPTION"
+            elif compare1[1] != compare2[1]:
+                message = "PRF"
+            elif compare1[2] != compare2[2]:
+                message = "HASH"
+            elif  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
+                message = "DH Group"
+        elif logs["11003"] and logs["11917"] and logs["11918"] :
+             message = "tunnel-group for peer x.x.x.x missing keys" # Replace X for the true value
+        elif logs["13065"] and logs["13966"] :
+            message = "Remote end not replying to UDP 500 init message, possible device in betwen blocking comunication or remote end configure for the wrong peer"
+        elif logs["11904"] and logs["11907"]:
+            message = "Tunnel-group not configured, verify there is a tunnel-group configured for IP x.x.x.x" # Replace X for the true value
+        elif logs["10001"]:
+            message = "Is initiator"
 
-ch = CheckCase('../pub/debugs/userlog.txt')
+        return message
+
+ch = CheckCase('../pub/debugs/iniciator.txt')
 ch.extractInfo()
+
+print(ch.extractInfo())

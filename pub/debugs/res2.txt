@@ -1,0 +1,16 @@
+//PRF
+
+
+IKEv2-PROTO-5: (7): Failed to verify the proposed policies
+IKEv2-PROTO-1: (7): Failed to find a matching policy
+IKEv2-PROTO-1: (7): Received Policies:
+Proposal 1:  AES-CBC-256 SHA256 SHA256 DH_GROUP_2048_MODP/Group 14
+
+IKEv2-PROTO-1: (7): Failed to find a matching policy
+IKEv2-PROTO-1: (7): Expected Policies:
+Proposal 1:  AES-CBC-256 SHA1 SHA256 DH_GROUP_2048_MODP/Group 14
+
+IKEv2-PROTO-1: (7): Failed to find a matching policy
+
+
+

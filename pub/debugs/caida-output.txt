@@ -1,0 +1,43 @@
+======================================== 
+==== Phase 1 
+========================================
+Are we initiators:  True
+Peer:  1.1.1.1
+Authentication Method:  'PSK'
+Tunnel Type:  L2L
+Protocol Used:  IKE
+Phase 1 completed:  True
+Only UDP 500 (No NAT T):  No NAT found
+We are behind NAT:  False
+Remote end behind NAT:  False
+Local Authnetication:  PSK
+peerAuthenticationType:  PKI
+peerAuthenticationComplete:  True
+Agreed encryption:  ['AES-CBC']
+Agreed PRF group:  ['SHA256']
+Agreed hashing:  ['SHA256']
+Agreed DH Group:  ['DH_GROUP_2048_MODP/Group 14']
+
+======================================== 
+==== Phase 2 
+========================================
+Idle Timeout:  30 
+Session Timeout:  0 
+Matched Group-Policy:  DfltGrpPolicy
+DPD Timer:  10
+Initiator SPI:  DCA635040E30A6A3
+Responder SPI:  DDF0F6E503F92A3D
+Tunnel established!:  True
+
+======================================== 
+==== Misc 
+========================================
+Amount of Phase 2 proposals sent:  1
+p2_proposal:  ['1']
+p2_proposal_encryption:  ['AES-CBC']
+p2_proposal_hash:  ['SHA256']
+p2_proposal_esn:  ["Don't use ESN"]
+Local encryption domain:  192.168.2.1
+Remote encryption domain:  192.168.1.1
+Agreed SA Local:  192.168.2.1
+Agreed SA Remote:  192.168.1.1

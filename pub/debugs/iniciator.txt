@@ -1,0 +1,26 @@
+<Error-1001 No tunnel-group Tunnel group No exist>
+
+IKEv2-PLAT-1: Can't find tunnel group for peer 1.1.1.1
+IKEv2-PLAT-1: unable to set self auth method. Probable misconfiguration.
+IKEv2-PLAT-1: Failed to set P1 auth to build policy
+IKEv2-PLAT-1: Could not build ikev2 policy
+IKEv2-PLAT-1: asa connect start L2L failed
+
+</>
+<Error-1002 Tunnel-group with no keys>
+
+IKEv2-PLAT-2: attempting to find tunnel group for IP: 1.1.1.1
+IKEv2-PLAT-2: mapped to tunnel group 1.1.1.1 using peer IP
+IKEv2-PLAT-1: Failed to set P1 auth to build policy
+IKEv2-PLAT-1: Could not build ikev2 policy
+IKEv2-PLAT-1: asa connect start L2L failed
+
+</>
+<Error-1003 Encryption/hash/dh Group/prf mismatch>
+IKEv2-PROTO-5: Parse Notify Payload: NO_PROPOSAL_CHOSEN(4):  NOTIFY(NO_PROPOSAL_CHOSEN)(4):   Next payload: NONE, reserved: 0x0, length: 8
+IKEv2-PROTO-1: (4): Received no proposal chosen notify
+IKEv2-PROTO-1: (4): Initial exchange failed
+IKEv2-PLAT-5: Negotiating SA request deleted
+IKEv2-PROTO-2: (4): Abort exchange
+IKEv2-PLAT-1: Failed to remove peer correlation entry from cikePeerCorrTable.  Local Type = 0.  Local Address = 0.0.0.0.  Remote Type = 0.  Remote Address = 0.0.0.0.  Correlation Peer Index = 0. IPSEC Tunnel Index = 0.
+</>
