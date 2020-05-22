@@ -54,28 +54,41 @@ class CheckCase():
 
         message = ""
 
+        if functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != "not found":
+            peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))
+        else:
+            peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))
+
         if logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"]:
             message = "Remote end sent no proposal chosen, verify phase 1 policies match"
         elif logs["11003"] and logs["11008"] and logs["11917"] and logs["11918"]:
-            message = "tunnel-group for peer x.x.x.x missing keys" # Replace X for the true value
+            message = "tunnel-group for peer %s missing keys" % peer
         elif logs["13128"] and logs["13129"] and logs["13130"]:
-            compare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog).group(0)
-            compare1 = re.search('Proposal 1:  (.+?)\n', compare1).group(1)
-            compare1 = compare1.split(" ")
-            compare2 = re.search('Expected Policies:\nProposal 1:  (.+?)\n', userLog).group(0)
-            compare2 = re.search('Proposal 1:  (.+?)\n', compare2).group(1)
-            compare2 = compare2.split(" ")
+            compare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog)
+            compare2 = re.search('Expected Policies:\nProposal 1:  (.+?)\n', userLog)
 
-            if compare1[0] != compare2[0]:
-                message = "ENCRYPTION"
-            elif compare1[1] != compare2[1]:
-                message = "PRF"
-            elif compare1[2] != compare2[2]:
-                message = "HASH"
-            elif  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
-                message = "DH Group"
+            if compare1 is not None and compare2 is not None:
+                compare1 = compare1.group(0)
+                compare2 = compare2.group(0)
+
+                compare1 = re.search('Proposal 1:  (.+?)\n', compare1).group(1)
+                compare1 = compare1.split(" ")
+                compare2 = re.search('Proposal 1:  (.+?)\n', compare2).group(1)
+                compare2 = compare2.split(" ")
+
+                if compare1[0] != compare2[0]:
+                    message = "ENCRYPTION"
+                elif compare1[1] != compare2[1]:
+                    message = "PRF"
+                elif compare1[2] != compare2[2]:
+                    message = "HASH"
+                elif  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
+                    message = "DH Group"
+            else:
+                message = "Failed to verify the proposed policies"
+
         elif logs["11003"] and logs["11917"] and logs["11918"] :
-             message = "tunnel-group for peer x.x.x.x missing keys" # Replace X for the true value
+             message = "tunnel-group for peer %s missing keys" % peer
         elif logs["13065"] and logs["13966"] :
             message = "Remote end not replying to UDP 500 init message, possible device in betwen blocking comunication or remote end configure for the wrong peer"
         elif logs["11904"] and logs["11907"]:
@@ -85,7 +98,8 @@ class CheckCase():
 
         return message
 
-# ch = CheckCase('../pub/debugs/iniciator.txt')
-# ch.extractInfo()
 
-# print(ch.extractInfo())
+ch = CheckCase('../pub/debugs/iniciator.txt')
+ch.extractInfo()
+
+print(ch.extractInfo())
