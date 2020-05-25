@@ -1,7 +1,5 @@
-from infoExtractor import extractor
-
-res = extractor('../pub/debugs/userlog2.txt')
-print(res)
+# from infoExtractor import extractor
+# res = extractor('../pub/debugs/userlog2.txt')
 
 # print("iniciator: ", iniciator)
 # print("peer: ", peer)

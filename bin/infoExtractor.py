@@ -168,10 +168,8 @@ def extractor(filePath):
         "Agreed encryption: ": p1_proposal_encryption_resp,
         "Agreed PRF group: ": p1_proposal_prf_resp,
         "Agreed hashing: ": p1_proposal_integrity_resp,
-        "Agreed DH Group: ": p1_proposal_group_resp,
-
+        "Agreed DH Group: ": p1_proposal_group_resp[0].split('/')[1],
     }
-
 
     fase2 = {
         "Amount of Phase 2 proposals sent: ": proposal_number_phase_2,

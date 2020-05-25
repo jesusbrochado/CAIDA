@@ -1,0 +1,462 @@
+KEv2-PLAT-3: RECV PKT [IKE_SA_INIT] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x27354e58b4e16a54 RespSPI=0x0000000000000000 MID=00000000
+
+IKEv2-PROTO-2: Received Packet [From 20.20.20.1:500/To 30.30.30.1:500/VRF i0:f0]
+Initiator SPI : 27354E58B4E16A54 - Responder SPI : 0000000000000000 Message id: 0
+IKEv2 IKE_SA_INIT Exchange REQUESTIKEv2-PROTO-3: Next payload: SA, version: 2.0 Exchange type: IKE_SA_INIT, flags: INITIATOR Message id: 0, length: 566
+Payload contents:
+ SA  Next payload: KE, reserved: 0x0, length: 48
+  last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4    last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+    last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+    last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+    last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+ KE  Next payload: N, reserved: 0x0, length: 264
+    DH group: 14, Reserved: 0x0
+
+     79 53 d3 56 fe 14 0b 57 96 05 ce 4f 6b e7 ec 65
+     69 89 b8 50 09 4e 59 95 a5 d4 80 80 15 89 4a a7
+     f7 6f b5 b3 83 86 cb fb 3c fb bc 91 34 b9 b0 4d
+     d9 30 aa 69 3b 85 b6 53 57 74 65 ee 9c a0 be 40
+     56 f0 e4 cc 25 f6 79 af 22 d2 6c cf 22 87 68 20
+     94 8f 1f 04 0c d2 fb 04 62 e3 cf e8 81 19 38 8b
+     96 64 c9 25 65 2a b8 d3 c0 93 a4 07 76 b6 eb 3d
+     2a 1f 66 50 e1 dc dc b6 1b e7 0f 64 51 cb ee 41
+     5f eb e4 e2 7e f1 0b 82 d8 96 dc 14 d4 a0 d0 12
+     a6 dd 2f 9e 87 a3 b8 bf 24 fc 71 74 48 09 51 cc
+     ac 61 2f 14 da 7b 63 c9 97 e7 1e 94 82 10 05 c7
+     57 59 65 52 a4 ae e7 17 20 16 dd 44 4a 84 62 68
+     5d 82 9b f1 92 0e b9 94 45 a1 f1 07 16 01 77 ef
+     86 dc 53 de 27 d8 b7 f3 88 6d d7 b2 3c 2d da e4
+     c6 f6 6c 3e 72 9d 2c 16 18 38 0b 70 9e 75 78 19
+     3d 94 1d e6 a7 69 1c 95 e3 12 ab a0 2a 94 5a 61
+ N  Next payload: VID, reserved: 0x0, length: 68
+
+     40 8a 70 78 c5 82 79 ef 98 df 71 96 5a c0 50 bb
+     3e d6 f1 27 71 fa 3d 7b d9 f0 16 cf f9 49 fc 3c
+     4d 54 6b 68 a0 4f 6e be d3 07 8b 11 9b db e6 a8
+     3c 2e 95 01 b0 b9 2d 37 87 9b 55 5c f4 4c dc e9
+IKEv2-PROTO-5: Parse Vendor Specific Payload: CISCO-DELETE-REASON VID  Next payload: VID, reserved: 0x0, length: 23
+
+     43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+     53 4f 4e
+IKEv2-PROTO-5: Parse Vendor Specific Payload: (CUSTOM) VID  Next payload: NOTIFY, reserved: 0x0, length: 59
+
+     43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+     26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+     30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+     73 2c 20 49 6e 63 2e
+IKEv2-PROTO-5: Parse Notify Payload: NAT_DETECTION_SOURCE_IP NOTIFY(NAT_DETECTION_SOURCE_IP)  Next payload: NOTIFY, reserved: 0x0, length: 28
+    Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+
+     13 59 2d 50 e8 47 85 6f 2f 67 e5 56 4a f7 b1 ed
+     15 ff da f2
+IKEv2-PROTO-5: Parse Notify Payload: NAT_DETECTION_DESTINATION_IP NOTIFY(NAT_DETECTION_DESTINATION_IP)  Next payload: VID, reserved: 0x0, length: 28
+    Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+
+     0e 6b 83 5e 0d 96 ab bc 89 2c a2 74 e9 de ae f7
+     94 ca 30 19
+IKEv2-PROTO-5: Parse Vendor Specific Payload: FRAGMENTATION VID  Next payload: NONE, reserved: 0x0, length: 20
+
+     40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+
+Decrypted packet:Data: 566 bytes
+IKEv2-PLAT-2: Process custom VID payloads
+IKEv2-PLAT-2: Cisco Copyright VID received from peer
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: IDLE Event: EV_RECV_INIT
+IKEv2-PROTO-2: (27): Checking NAT discovery
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK_REDIRECT
+IKEv2-PROTO-5: (27): Redirect check is not needed, skipping it
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK_CAC
+IKEv2-PLAT-5: New ikev2 sa request admitted
+IKEv2-PLAT-5: Incrementing incoming negotiating sa count by one
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK_COOKIE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK4_COOKIE_NOTIFY
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_INIT Event: EV_VERIFY_MSG
+IKEv2-PROTO-2: (27): Verify SA init message
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_INIT Event: EV_INSERT_SA
+IKEv2-PROTO-2: (27): Insert SA
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_INIT Event: EV_GET_IKE_POLICY
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_INIT Event: EV_PROC_MSG
+IKEv2-PROTO-2: (27): Processing IKE_SA_INIT message
+IKEv2-PLAT-2: (27): my auth method set to: 0
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_INIT Event: EV_DETECT_NAT
+IKEv2-PROTO-5: (27): Process NAT discovery notify
+IKEv2-PROTO-5: (27): Processing nat detect src notify
+IKEv2-PROTO-5: (27): Remote address matched
+IKEv2-PROTO-5: (27): Processing nat detect dst notify
+IKEv2-PROTO-5: (27): Local address matched
+IKEv2-PROTO-5: (27): No NAT found
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_INIT Event: EV_CHK_CONFIG_MODE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_SET_POLICY
+IKEv2-PROTO-5: (27): Setting configured policies
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_CHK_AUTH4PKI
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_PKI_SESH_OPEN
+IKEv2-PROTO-5: (27): Opening a PKI session
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_GEN_DH_KEY
+IKEv2-PROTO-2: (27): [IKEv2 -> Crypto Engine] Computing DH public key, DH Group 14
+IKEv2-PROTO-2: (27): Request queued for computation of DH key
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_NO_EVENT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_OK_RECD_DH_PUBKEY_RESP
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_GEN_DH_SECRET
+IKEv2-PROTO-2: (27): [IKEv2 -> Crypto Engine] Computing DH secret key, DH Group 14
+IKEv2-PROTO-2: (27): Request queued for computation of DH secret
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_NO_EVENT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_OK_RECD_DH_SECRET_RESP
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_GEN_SKEYID
+IKEv2-PROTO-5: (27): Generate skeyid
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_GET_CONFIG_MODE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_BLD_INIT Event: EV_BLD_MSG
+IKEv2-PROTO-2: (27): Generating IKE_SA_INIT message
+IKEv2-PROTO-2: (27): IKE Proposal: 1, SPI size: 0 (initial negotiation),
+Num. transforms: 4
+(27):    AES-CBC(27):    SHA1(27):    SHA256(27):    DH_GROUP_2048_MODP/Group 14IKEv2-PROTO-5: Construct Vendor Specific Payload: DELETE-REASONIKEv2-PROTO-5: Construct Vendor Specific Payload: (CUSTOM)IKEv2-PROTO-5: Construct Notify Payload: NAT_DETECTION_SOURCE_IPIKEv2-PROTO-5: Construct Notify Payload: NAT_DETECTION_DESTINATION_IPAdding trusted issuer hash to send. Hash:
+     83 24 42 23 d6 cb f0 a2 6f c7 de 27 ce bc a4 bd
+     a3 26 12 ad
+IKEv2-PROTO-5: Construct Vendor Specific Payload: FRAGMENTATION(27):
+IKEv2-PROTO-2: (27): Sending Packet [To 20.20.20.1:500/From 30.30.30.1:500/VRF i0:f0]
+(27): Initiator SPI : 27354E58B4E16A54 - Responder SPI : 0869000CD1148461 Message id: 0
+(27): IKEv2 IKE_SA_INIT Exchange RESPONSEIKEv2-PROTO-3: (27): Next payload: SA, version: 2.0 (27): Exchange type: IKE_SA_INIT, flags: RESPONDER MSG-RESPONSE (27): Message id: 0, length: 591(27):
+Payload contents:
+(27):  SA(27):   Next payload: KE, reserved: 0x0, length: 48
+(27):   last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4(27):     last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+(27):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+(27):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+(27):     last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+(27):  KE(27):   Next payload: N, reserved: 0x0, length: 264
+(27):     DH group: 14, Reserved: 0x0
+(27):
+(27):      63 00 a1 3c 40 6d de 03 a9 bd 8b 3f 13 1c a8 02
+(27):      24 f0 54 13 4e 12 e0 2d 69 d8 33 4f 2c cd 6b 6a
+(27):      7a b7 d7 31 9b d2 31 e6 27 01 8e 0c 8f a0 f3 46
+(27):      dc 3e 1d e4 45 7c 31 fa 4f a7 46 b8 74 ee 39 58
+(27):      fd 6f aa b1 8f d0 f4 e4 d7 72 6c 24 cf 77 bc 43
+(27):      1c 4d 1b 8e 2d 5a ec b0 8a e1 d1 36 2b a7 a9 75
+(27):      14 bb 5e 9e 43 2b a6 57 47 ca 92 13 30 4b 07 74
+(27):      10 ae 87 16 a6 eb e8 e6 a6 ac 8c a7 60 46 de f0
+(27):      91 35 9a 0e b9 ff 6c 88 9b ad e8 d9 ee 9d 40 e6
+(27):      4b 8e 50 6b 3a bf 8a fc ac 7a 8d 4d 36 c8 5d ad
+(27):      73 06 0d b7 dd 4b d7 bc 9d 69 96 55 16 51 dc cd
+(27):      54 d2 72 5d 92 45 c5 c5 4d 79 da ad 29 b4 d0 4e
+(27):      7a d7 c1 2f 29 6a cc 0f 6d 1d 4a 08 02 82 5e 08
+(27):      73 91 b1 c8 a3 56 bc 7e 7f 86 be 0b 80 ca c4 e5
+(27):      64 a0 c9 73 6a 96 39 9c 48 e9 c1 0c 1c 89 7a ed
+(27):      12 b2 80 36 85 88 31 68 45 48 34 57 e1 c6 9c 0a
+(27):  N(27):   Next payload: VID, reserved: 0x0, length: 68
+(27):
+(27):      4e 46 be bf d7 1b d2 33 ea 5b 15 8c c3 71 77 b8
+(27):      83 dc d6 0a f4 2f 1a d7 c0 ba b3 0b f9 17 f5 7e
+(27):      cf 8d 74 eb 8c 76 88 13 3d 2b 17 96 2f b4 fc 33
+(27):      ff 04 ae 70 30 2d 5a 90 d8 d0 ff 43 b2 0d a9 b6
+(27):  VID(27):   Next payload: VID, reserved: 0x0, length: 23
+(27):
+(27):      43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+(27):      53 4f 4e
+(27):  VID(27):   Next payload: NOTIFY, reserved: 0x0, length: 59
+(27):
+(27):      43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+(27):      26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+(27):      30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+(27):      73 2c 20 49 6e 63 2e
+(27):  NOTIFY(NAT_DETECTION_SOURCE_IP)(27):   Next payload: NOTIFY, reserved: 0x0, length: 28
+(27):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+(27):
+(27):      bf 31 e8 dc 7c 23 a0 4a 38 c3 68 03 9b 94 4d f1
+(27):      c8 5f f4 f2
+(27):  NOTIFY(NAT_DETECTION_DESTINATION_IP)(27):   Next payload: CERTREQ, reserved: 0x0, length: 28
+(27):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+(27):
+(27):      e9 44 29 81 7c 0d 6f 25 c6 54 5c a0 3b 12 4e ec
+(27):      56 ab 28 51
+(27):  CERTREQ(27):   Next payload: VID, reserved: 0x0, length: 25
+(27):     Cert encoding X.509 Certificate - signature
+(27): CertReq data: 20 bytes
+(27):  VID(27):   Next payload: NONE, reserved: 0x0, length: 20
+(27):
+(27):      40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+(27):
+IKEv2-PLAT-3: (27): SENT PKT [IKE_SA_INIT] [30.30.30.1]:500->[20.20.20.1]:500 InitSPI=0x27354e58b4e16a54 RespSPI=0x0869000cd1148461 MID=00000000
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: INIT_DONE Event: EV_DONE
+IKEv2-PROTO-2: (27): Fragmentation is enabled
+IKEv2-PROTO-5: (27): Cisco DeleteReason Notify is enabled
+IKEv2-PROTO-2: (27): Completed SA init exchange
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: INIT_DONE Event: EV_CHK4_ROLE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: INIT_DONE Event: EV_START_TMR
+IKEv2-PROTO-2: (27): Starting timer (30 sec) to wait for auth message
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000000 CurState: R_WAIT_AUTH Event: EV_NO_EVENT
+IKEv2-PLAT-3: RECV PKT [IKE_AUTH] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x27354e58b4e16a54 RespSPI=0x0869000cd1148461 MID=00000001
+IKEv2-PROTO-5: (27): Request has mess_id 1; expected 1 through 1
+
+(27):
+IKEv2-PROTO-2: (27): Received Packet [From 20.20.20.1:500/To 30.30.30.1:500/VRF i0:f0]
+(27): Initiator SPI : 27354E58B4E16A54 - Responder SPI : 0869000CD1148461 Message id: 1
+(27): IKEv2 IKE_AUTH Exchange REQUESTIKEv2-PROTO-3: (27): Next payload: ENCR, version: 2.0 (27): Exchange type: IKE_AUTH, flags: INITIATOR (27): Message id: 1, length: 288(27):
+Payload contents:
+IKEv2-PLAT-2: (27): Decrypt success status returned via ipc 1
+IKEv2-PROTO-1: decrypt queued(27):
+(27): Decrypted packet:(27): Data: 288 bytes
+IKEv2-PROTO-1: Asynchronous request queued
+IKEv2-PROTO-1:
+(27): REAL Decrypted packet:(27): Data: 208 bytes
+IKEv2-PROTO-5: Parse Vendor Specific Payload: (CUSTOM) VID  Next payload: IDi, reserved: 0x0, length: 20
+
+     25 35 4f 58 a7 d6 99 13 df 88 43 6c 11 b2 72 3e
+ IDi  Next payload: AUTH, reserved: 0x0, length: 12
+    Id type: IPv4 address, Reserved: 0x0 0x0
+
+     14 14 14 01
+ AUTH  Next payload: SA, reserved: 0x0, length: 28
+    Auth method PSK, reserved: 0x0, reserved 0x0
+Auth data: 20 bytes
+ SA  Next payload: TSi, reserved: 0x0, length: 44
+  last proposal: 0x0, reserved: 0x0, length: 40
+  Proposal: 1, Protocol id: ESP, SPI size: 4, #trans: 3    last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+    last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+    last transform: 0x0, reserved: 0x0: length: 8
+    type: 5, reserved: 0x0, id: Don't use ESN
+ TSi  Next payload: TSr, reserved: 0x0, length: 40
+    Num of TSs: 2, reserved 0x0, reserved 0x0
+    TS type: TS_IPV4_ADDR_RANGE, proto id: 0, length: 16
+    start port: 0, end port: 65535
+    start addr: 10.0.0.10, end addr: 10.0.0.10
+    TS type: TS_IPV4_ADDR_RANGE, proto id: 0, length: 16
+    start port: 0, end port: 65535
+    start addr: 10.0.0.0, end addr: 10.0.0.255
+ TSr  Next payload: NOTIFY, reserved: 0x0, length: 40
+    Num of TSs: 2, reserved 0x0, reserved 0x0
+    TS type: TS_IPV4_ADDR_RANGE, proto id: 0, length: 16
+    start port: 0, end port: 65535
+    start addr: 172.16.0.10, end addr: 172.16.0.10
+    TS type: TS_IPV4_ADDR_RANGE, proto id: 0, length: 16
+    start port: 0, end port: 65535
+    start addr: 172.16.0.0, end addr: 172.16.0.255
+IKEv2-PROTO-5: Parse Notify Payload: INITIAL_CONTACT NOTIFY(INITIAL_CONTACT)  Next payload: NOTIFY, reserved: 0x0, length: 8
+    Security protocol id: IKE, spi size: 0, type: INITIAL_CONTACT
+IKEv2-PROTO-5: Parse Notify Payload: ESP_TFC_NO_SUPPORT NOTIFY(ESP_TFC_NO_SUPPORT)  Next payload: NOTIFY, reserved: 0x0, length: 8
+    Security protocol id: IKE, spi size: 0, type: ESP_TFC_NO_SUPPORT
+IKEv2-PROTO-5: Parse Notify Payload: NON_FIRST_FRAGS NOTIFY(NON_FIRST_FRAGS)  Next payload: NONE, reserved: 0x0, length: 8
+    Security protocol id: IKE, spi size: 0, type: NON_FIRST_FRAGS
+
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_RECV_AUTH
+IKEv2-PROTO-2: (27): Stopping timer to wait for auth message
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_CHK_NAT_T
+IKEv2-PROTO-2: (27): Checking NAT discovery
+IKEv2-PROTO-2: (27): NAT not found
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_PROC_ID
+IKEv2-PROTO-5: (27): Received valid parameteres in process id
+IKEv2-PLAT-2: (27): peer auth method set to: 2
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_CHK_IF_PEER_CERT_NEEDS_TO_BE_FETCHED_FOR_PROF_SEL
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_GET_POLICY_BY_PEERID
+IKEv2-PROTO-2: (27): Searching policy based on peer's identity '20.20.20.1' of type 'IPv4 address'
+IKEv2-PLAT-2: (27): Site to Site connection detected
+IKEv2-PLAT-2: attempting to find tunnel group for ID: 20.20.20.1
+IKEv2-PLAT-2: mapped to tunnel group 20.20.20.1 using phase 1 ID
+IKEv2-PLAT-2: tg_name set to: 20.20.20.1
+IKEv2-PLAT-2: tunn grp type set to: L2L
+IKEv2-PLAT-2: (27): my auth method set to: 2
+IKEv2-PLAT-2: my_auth_method = 2
+IKEv2-PLAT-2: supported_peers_auth_method = 2
+IKEv2-PLAT-2: (27): P1 ID = 0
+IKEv2-PLAT-2: (27): Translating IKE_ID_AUTO to = 255
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_SET_POLICY
+IKEv2-PROTO-5: (27): Setting configured policies
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_VERIFY_POLICY_BY_PEERID
+IKEv2-PROTO-2: (27): Verify peer's policy
+IKEv2-PROTO-2: (27): Peer's policy verified
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_CHK_AUTH4EAP
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_WAIT_AUTH Event: EV_CHK_POLREQEAP
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_CHK_AUTH_TYPE
+IKEv2-PROTO-2: (27): Get peer's authentication method
+IKEv2-PROTO-2: (27): Peer's authentication method is 'PSK'
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_GET_PRESHR_KEY
+IKEv2-PROTO-2: (27): Get peer's preshared key for 20.20.20.1
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_VERIFY_AUTH
+IKEv2-PROTO-2: (27): Verify peer's authentication data
+IKEv2-PROTO-2: (27): Use preshared key for id 20.20.20.1, key len 5
+IKEv2-PROTO-2: (27): Verification of peer's authenctication data PASSED
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_CHK4_IC
+IKEv2-PROTO-2: (27): Processing INITIAL_CONTACT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_CHK_REDIRECT
+IKEv2-PROTO-5: (27): Redirect check is not needed, skipping it
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_NOTIFY_AUTH_DONE
+IKEv2-PLAT-2: (27): Completed authentication for connection
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_CHK_CONFIG_MODE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_GET_CONFIG_MODE
+IKEv2-PLAT-2: Build config mode reply: no request stored
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_PROC_SA_TS
+IKEv2-PROTO-2: (27): Processing IKE_AUTH message
+IKEv2-PLAT-2: (27): Crypto Map: No proxy match on map VPN_MAP seq 1
+IKEv2-PROTO-1: (27): Failed to find a matching policy
+IKEv2-PROTO-1: (27): Received Policies:
+ESP: Proposal 1:  AES-CBC-256 SHA256 Don't use ESN
+
+IKEv2-PROTO-1: (27): Failed to find a matching policy
+IKEv2-PROTO-1: (27): Expected Policies:
+IKEv2-PROTO-5: (27): Failed to verify the proposed policies
+IKEv2-PROTO-1: (27): Failed to find a matching policy
+IKEv2-PROTO-1: (27):
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_VERIFY_AUTH Event: EV_NO_PROP_CHOSEN
+IKEv2-PROTO-2: (27): Sending no proposal chosen notify
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_MY_AUTH_METHOD
+IKEv2-PROTO-2: (27): Get my authentication method
+IKEv2-PROTO-2: (27): My authentication method is 'PSK'
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_GET_PRESHR_KEY
+IKEv2-PROTO-2: (27): Get peer's preshared key for 20.20.20.1
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_GEN_AUTH
+IKEv2-PROTO-2: (27): Generate my authentication data
+IKEv2-PROTO-2: (27): Use preshared key for id 30.30.30.1, key len 5
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_CHK4_SIGN
+IKEv2-PROTO-2: (27): Get my authentication method
+IKEv2-PROTO-2: (27): My authentication method is 'PSK'
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_OK_AUTH_GEN
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_SEND_AUTH
+IKEv2-PROTO-2: (27): Generating IKE_AUTH message
+IKEv2-PROTO-5: Construct Vendor Specific Payload: CISCO-GRANITEIKEv2-PROTO-2: (27): Constructing IDr payload: '30.30.30.1' of type 'IPv4 address'
+IKEv2-PROTO-5: Construct Notify Payload: NO_PROPOSAL_CHOSENIKEv2-PROTO-2: (27): Building packet for encryption.
+(27):
+Payload contents:
+(27):  VID(27):   Next payload: IDr, reserved: 0x0, length: 20
+(27):
+(27):      0a 69 01 0c c2 23 77 26 df 88 43 6c 11 b2 72 3e
+(27):  IDr(27):   Next payload: AUTH, reserved: 0x0, length: 12
+(27):     Id type: IPv4 address, Reserved: 0x0 0x0
+(27):
+(27):      1e 1e 1e 01
+(27):  AUTH(27):   Next payload: NOTIFY, reserved: 0x0, length: 28
+(27):     Auth method PSK, reserved: 0x0, reserved 0x0
+(27): Auth data: 20 bytes
+(27):  NOTIFY(NO_PROPOSAL_CHOSEN)(27):   Next payload: NONE, reserved: 0x0, length: 8
+(27):     Security protocol id: IKE, spi size: 0, type: NO_PROPOSAL_CHOSEN
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_ENCRYPT_MSG
+IKEv2-PLAT-2: (27): Encrypt success status returned via ipc 1
+IKEv2-PROTO-2: (27):
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_NO_EVENT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_OK_ENCRYPT_RESP
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_TRYSEND
+(27):
+IKEv2-PROTO-2: (27): Sending Packet [To 20.20.20.1:500/From 30.30.30.1:500/VRF i0:f0]
+(27): Initiator SPI : 27354E58B4E16A54 - Responder SPI : 0869000CD1148461 Message id: 1
+(27): IKEv2 IKE_AUTH Exchange RESPONSEIKEv2-PROTO-3: (27): Next payload: ENCR, version: 2.0 (27): Exchange type: IKE_AUTH, flags: RESPONDER MSG-RESPONSE (27): Message id: 1, length: 144(27):
+Payload contents:
+(27):  ENCR(27):   Next payload: VID, reserved: 0x0, length: 116
+(27): Encrypted data: 112 bytes
+(27):
+IKEv2-PLAT-3: (27): SENT PKT [IKE_AUTH] [30.30.30.1]:500->[20.20.20.1]:500 InitSPI=0x27354e58b4e16a54 RespSPI=0x0869000cd1148461 MID=00000001
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: R_BLD_AUTH Event: EV_CHK_AUTH_FAIL
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_OK
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_UPDATE_CAC_STATS
+IKEv2-PLAT-5: New ikev2 sa request activated
+IKEv2-PLAT-5: Decrement count for incoming negotiating
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_INSERT_IKE
+IKEv2-PROTO-2: (27): IKEV2 SA created; inserting SA into database. SA lifetime timer (86400 sec) started
+IKEv2-PLAT-2:
+CONNECTION STATUS: UP... peer: 20.20.20.1:500, phase1_id: 20.20.20.1
+IKEv2-PROTO-2: (27): Session with IKE ID PAIR (20.20.20.1, 30.30.30.1) is UP
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_REGISTER_SESSION
+IKEv2-PLAT-2: (27): connection auth hdl set to 15
+IKEv2-PLAT-2: (27): AAA conn attribute retrieval successfully queued for register session request.
+IKEv2-PROTO-2: (27):
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_NO_EVENT
+IKEv2-PLAT-2: (27): idle timeout set to: 30
+IKEv2-PLAT-2: (27): session timeout set to: 0
+IKEv2-PLAT-2: (27): group policy set to DfltGrpPolicy
+IKEv2-PLAT-2: (27): class attr set
+IKEv2-PLAT-2: (27): tunnel protocol set to: 0x5c
+IKEv2-PLAT-2: (27): IPv4 filter ID not configured for connection
+IKEv2-PLAT-2: (27): group lock set to: none
+IKEv2-PLAT-2: (27): IPv6 filter ID not configured for connection
+IKEv2-PLAT-2: (27): connection attribues set valid to TRUE
+IKEv2-PLAT-2: (27): Successfully retrieved conn attrs
+IKEv2-PLAT-2: (27): Session registration after conn attr retrieval PASSED, No error
+IKEv2-PLAT-2:
+CONNECTION STATUS: REGISTERED... peer: 20.20.20.1:500, phase1_id: 20.20.20.1
+IKEv2-PROTO-2: (27): Initializing DPD, configured for 10 seconds
+IKEv2-PLAT-2: mib_index set to: 501
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_RECD_REGISTER_SESSION_RESP
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_CHECK_DUPE
+IKEv2-PROTO-2: (27): Checking for duplicate IKEv2 SA
+IKEv2-PROTO-2: (27): No duplicate IKEv2 SA found
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: AUTH_DONE Event: EV_CHK4_ROLE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: READY Event: EV_R_OK
+IKEv2-PROTO-2: (27): Starting timer (8 sec) to delete negotiation context
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000001 CurState: READY Event: EV_NO_EVENT
+IKEv2-PLAT-3: RECV PKT [INFORMATIONAL] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x27354e58b4e16a54 RespSPI=0x0869000cd1148461 MID=00000002
+IKEv2-PROTO-5: (27): Request has mess_id 2; expected 2 through 2
+
+(27):
+IKEv2-PROTO-2: (27): Received Packet [From 20.20.20.1:500/To 30.30.30.1:500/VRF i0:f0]
+(27): Initiator SPI : 27354E58B4E16A54 - Responder SPI : 0869000CD1148461 Message id: 2
+(27): IKEv2 INFORMATIONAL Exchange REQUESTIKEv2-PROTO-3: (27): Next payload: ENCR, version: 2.0 (27): Exchange type: INFORMATIONAL, flags: INITIATOR (27): Message id: 2, length: 80(27):
+Payload contents:
+IKEv2-PLAT-2: (27): Decrypt success status returned via ipc 1
+IKEv2-PROTO-1: decrypt queued(27):
+(27): Decrypted packet:(27): Data: 80 bytes
+IKEv2-PROTO-1: Asynchronous request queued
+IKEv2-PROTO-1:
+(27): REAL Decrypted packet:(27): Data: 8 bytes
+ DELETE  Next payload: NONE, reserved: 0x0, length: 8
+    Security protocol id: IKE, spi size: 0, num of spi: 0
+
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: READY Event: EV_RECV_INFO_REQ
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_RECV_INFO_REQ
+IKEv2-PROTO-2: (27): Building packet for encryption.
+(27):
+Payload contents:
+(27):  DELETE(27):   Next payload: NONE, reserved: 0x0, length: 8
+(27):     Security protocol id: IKE, spi size: 0, num of spi: 0
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_ENCRYPT_MSG
+IKEv2-PLAT-2: (27): Encrypt success status returned via ipc 1
+IKEv2-PROTO-2: (27):
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_NO_EVENT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_OK_ENCRYPT_RESP
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_TRYSEND
+(27):
+IKEv2-PROTO-2: (27): Sending Packet [To 20.20.20.1:500/From 30.30.30.1:500/VRF i0:f0]
+(27): Initiator SPI : 27354E58B4E16A54 - Responder SPI : 0869000CD1148461 Message id: 2
+(27): IKEv2 INFORMATIONAL Exchange RESPONSEIKEv2-PROTO-3: (27): Next payload: ENCR, version: 2.0 (27): Exchange type: INFORMATIONAL, flags: RESPONDER MSG-RESPONSE (27): Message id: 2, length: 80(27):
+Payload contents:
+(27):  ENCR(27):   Next payload: DELETE, reserved: 0x0, length: 52
+(27): Encrypted data: 48 bytes
+(27):
+IKEv2-PLAT-3: (27): SENT PKT [INFORMATIONAL] [30.30.30.1]:500->[20.20.20.1]:500 InitSPI=0x27354e58b4e16a54 RespSPI=0x0869000cd1148461 MID=00000002
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_CHK_INFO_TYPE
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_RECV_DEL
+IKEv2-PROTO-2: (27): Process delete request from peer
+IKEv2-PROTO-2: (27): Processing DELETE INFO message for IKEv2 SA [ISPI: 0x27354E58B4E16A54 RSPI: 0x0869000CD1148461]
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_CHK4_ACTIVE_SA
+IKEv2-PROTO-2: (27): Check for existing active SA
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_STOP_ACCT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_IPSEC_DEL
+IKEv2-PROTO-2: (27): Delete all IKE SAs
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: INFO_R Event: EV_START_DEL_NEG_TMR
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: EXIT Event: EV_CHK_PENDING
+IKEv2-PROTO-5: (27): Sent response with message id 2, Requests can be accepted from range 3 to 3
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (R) MsgID = 00000002 CurState: EXIT Event: EV_NO_EVENT
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (I) MsgID = 00000001 CurState: READY Event: EV_RECV_DEL
+IKEv2-PROTO-5: (27): Action: Action_Null
+IKEv2-PROTO-5: (27): SM Trace-> SA: I_SPI=27354E58B4E16A54 R_SPI=0869000CD1148461 (I) MsgID = 00000001 CurState: DELETE Event: EV_FREE_SA
+IKEv2-PROTO-2: (27): Deleting SA
+IKEv2-PLAT-2:
+CONNECTION STATUS: DOWN... peer: 20.20.20.1:500, phase1_id: 20.20.20.1
+IKEv2-PLAT-2: (27): IKEv2 session deregistered from session manager. Reason: 4
+IKEv2-PLAT-2: (27): session manager killed ikev2 tunnel. Reason: User Requested
+IKEv2-PLAT-2: (27): PSH cleanup
+IKEv2-PLAT-5: Active ike sa request deleted
+IKEv2-PLAT-5: Decrement count for incoming active

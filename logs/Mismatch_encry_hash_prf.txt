@@ -1,0 +1,120 @@
+IKEv2-PLAT-3: RECV PKT [IKE_SA_INIT] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x9f9fb9cb56a56688 RespSPI=0x0000000000000000 MID=00000000
+
+IKEv2-PROTO-2: Received Packet [From 20.20.20.1:500/To 30.30.30.1:500/VRF i0:f0]
+Initiator SPI : 9F9FB9CB56A56688 - Responder SPI : 0000000000000000 Message id: 0
+IKEv2 IKE_SA_INIT Exchange REQUESTIKEv2-PROTO-3: Next payload: SA, version: 2.0 Exchange type: IKE_SA_INIT, flags: INITIATOR Message id: 0, length: 566
+Payload contents:
+ SA  Next payload: KE, reserved: 0x0, length: 48
+  last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4    last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+    last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+    last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+    last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+ KE  Next payload: N, reserved: 0x0, length: 264
+    DH group: 14, Reserved: 0x0
+
+     3c a5 0c 64 50 b4 00 ae 42 3c 8b 59 1e 85 32 c8
+     2e 02 01 f9 b7 a9 8a 70 12 e7 72 6b 2b 82 7e 49
+     10 ee 46 50 14 bc 15 21 8f 08 4a be 10 25 7e cd
+     04 7f 0f 43 04 4f 4e 80 14 fb 2c ea 56 d4 47 63
+     1e e3 46 95 ad e0 07 ba 7d 88 35 00 ca f8 8f da
+     e6 20 3a 8f b2 88 29 b2 3e 64 79 4b 89 f1 6e 1a
+     c2 bc 87 49 1d 4f 8f 28 cb 6e 4a ec a1 57 0f a9
+     92 e7 8d f0 5e d6 7a b0 c8 74 2a 09 7b 03 51 54
+     9a e2 2a 50 13 bc d8 e1 bc e7 13 e5 a3 0f 83 c2
+     7b c6 eb 4d dd d3 7f 5b 4e 42 96 5d a1 e7 07 8a
+     39 6f 1a 6e 59 82 ca 7d 6b 75 e7 0f 7d 7e 3a 75
+     af 66 fc bc 30 9a 7b 0d 1f 60 69 16 7e c2 cc 64
+     f7 3d de 1c ff 54 24 47 a7 94 0f e4 4a 75 fd 3d
+     5a 12 bb 07 3b f7 cb a7 17 9e 41 73 d8 ef 3f cf
+     73 e8 ce 41 33 a0 6a 3c ce 48 fb c2 75 b8 d6 6b
+     f4 1e f1 2b 9a a0 28 fc 2c 79 fa 62 bc 83 ab cb
+ N  Next payload: VID, reserved: 0x0, length: 68
+
+     93 de 29 03 68 1c c8 28 b6 03 96 95 26 1c 97 51
+     4e 4a 60 c1 6a c3 00 f5 3c 7a d1 ed ae 0d e7 4a
+     b8 83 65 1d 8e 2d 2b 6b 4d 5a 81 03 8b 45 d6 b6
+     c2 6f f0 09 db b5 c2 aa 80 f5 00 c6 c1 d6 b4 a4
+IKEv2-PROTO-5: Parse Vendor Specific Payload: CISCO-DELETE-REASON VID  Next payload: VID, reserved: 0x0, length: 23
+
+     43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+     53 4f 4e
+IKEv2-PROTO-5: Parse Vendor Specific Payload: (CUSTOM) VID  Next payload: NOTIFY, reserved: 0x0, length: 59
+
+     43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+     26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+     30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+     73 2c 20 49 6e 63 2e
+IKEv2-PROTO-5: Parse Notify Payload: NAT_DETECTION_SOURCE_IP NOTIFY(NAT_DETECTION_SOURCE_IP)  Next payload: NOTIFY, reserved: 0x0, length: 28
+    Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+
+     6d 92 bd 39 ca 6d 0d e2 21 88 3b 1b 4b 73 f5 1f
+     f7 39 18 af
+IKEv2-PROTO-5: Parse Notify Payload: NAT_DETECTION_DESTINATION_IP NOTIFY(NAT_DETECTION_DESTINATION_IP)  Next payload: VID, reserved: 0x0, length: 28
+    Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+
+     1d ba 7e 2e 6a 3d d5 4a 57 63 9c 37 97 c8 9d 25
+     3e 88 d0 c1
+IKEv2-PROTO-5: Parse Vendor Specific Payload: FRAGMENTATION VID  Next payload: NONE, reserved: 0x0, length: 20
+
+     40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+
+Decrypted packet:Data: 566 bytes
+IKEv2-PLAT-2: Process custom VID payloads
+IKEv2-PLAT-2: Cisco Copyright VID received from peer
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: IDLE Event: EV_RECV_INIT
+IKEv2-PROTO-2: (20): Checking NAT discovery
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK_REDIRECT
+IKEv2-PROTO-5: (20): Redirect check is not needed, skipping it
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK_CAC
+IKEv2-PLAT-5: New ikev2 sa request admitted
+IKEv2-PLAT-5: Incrementing incoming negotiating sa count by one
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK_COOKIE
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: IDLE Event: EV_CHK4_COOKIE_NOTIFY
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_VERIFY_MSG
+IKEv2-PROTO-2: (20): Verify SA init message
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_INSERT_SA
+IKEv2-PROTO-2: (20): Insert SA
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_GET_IKE_POLICY
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_PROC_MSG
+IKEv2-PROTO-2: (20): Processing IKE_SA_INIT message
+IKEv2-PROTO-5: (20): Failed to verify the proposed policies
+IKEv2-PROTO-1: (20): Failed to find a matching policy
+IKEv2-PROTO-1: (20): Received Policies:
+Proposal 1:  AES-CBC-128 SHA1 SHA256 DH_GROUP_2048_MODP/Group 14
+
+IKEv2-PROTO-1: (20): Failed to find a matching policy
+IKEv2-PROTO-1: (20): Expected Policies:
+Proposal 1:  AES-CBC-256 SHA256 SHA96 DH_GROUP_2048_MODP/Group 14
+
+IKEv2-PROTO-1: (20): Failed to find a matching policy
+IKEv2-PROTO-1: (20):
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_NO_PROP_CHOSEN
+IKEv2-PROTO-2: (20): Sending no proposal chosen notify
+IKEv2-PROTO-5: Construct Notify Payload: NO_PROPOSAL_CHOSENIKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_ENCRYPT_MSG
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: R_INIT Event: EV_TRYSEND
+(20):
+IKEv2-PROTO-2: (20): Sending Packet [To 20.20.20.1:500/From 30.30.30.1:500/VRF i0:f0]
+(20): Initiator SPI : 9F9FB9CB56A56688 - Responder SPI : F18A20FA68152023 Message id: 0
+(20): IKEv2 IKE_SA_INIT Exchange RESPONSEIKEv2-PROTO-3: (20): Next payload: NOTIFY, version: 2.0 (20): Exchange type: IKE_SA_INIT, flags: RESPONDER MSG-RESPONSE (20): Message id: 0, length: 36(20):
+Payload contents:
+(20):  NOTIFY(NO_PROPOSAL_CHOSEN)(20):   Next payload: NONE, reserved: 0x0, length: 8
+(20):     Security protocol id: IKE, spi size: 0, type: NO_PROPOSAL_CHOSEN
+(20):
+IKEv2-PLAT-3: (20): SENT PKT [IKE_SA_INIT] [30.30.30.1]:500->[20.20.20.1]:500 InitSPI=0x9f9fb9cb56a56688 RespSPI=0xf18a20fa68152023 MID=00000000
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: INIT_DONE Event: EV_FAIL
+IKEv2-PROTO-2: (20): Failed SA init exchange
+IKEv2-PROTO-1: (20): Initial exchange failed
+IKEv2-PROTO-1: (20): Initial exchange failed
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: EXIT Event: EV_ABORT
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: EXIT Event: EV_CHK_PENDING_ABORT
+IKEv2-PLAT-5: Negotiating SA request deleted
+IKEv2-PLAT-5: Decrement count for incoming negotiating
+IKEv2-PROTO-5: (20): SM Trace-> SA: I_SPI=9F9FB9CB56A56688 R_SPI=F18A20FA68152023 (R) MsgID = 00000000 CurState: EXIT Event: EV_UPDATE_CAC_STATS
+IKEv2-PROTO-2: (20): Abort exchange
+IKEv2-PROTO-2: (20): Deleting SA
+IKEv2-PLAT-2: (20): PSH cleanup
