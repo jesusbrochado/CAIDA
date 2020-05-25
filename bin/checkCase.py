@@ -30,12 +30,18 @@ class CheckCase():
         l13128 = functions.checkNotFoundCase(re.search('Received Policies', userLog))
         l13129 = functions.checkNotFoundCase(re.search('Failed to find a matching policy', userLog))
         l13130 = functions.checkNotFoundCase(re.search('Expected Policies', userLog))
+        l13931 = functions.checkNotFoundCase(re.search('Failed SA init exchange', userLog))
+        l13932 = functions.checkNotFoundCase(re.search('Initial exchange failed', userLog))
         l13967 = functions.checkNotFoundCase(re.search('Parse Notify Payload: AUTHENTICATION_FAILED NOTIFY(AUTHENTICATION_FAILED)', userLog))
         l13968 = functions.checkNotFoundCase(re.search('Failed to authenticate the IKE SA', userLog))
         l13969 = functions.checkNotFoundCase(re.search('Verify auth failed', userLog))
         l13970 = functions.checkNotFoundCase(re.search('Sending authentication failure notify', userLog))
         l13971 = functions.checkNotFoundCase(re.search('Auth exchange failed', userLog))
         l13972 = functions.checkNotFoundCase(re.search('Failed to receive the AUTH msg before the timer expired', userLog))
+        l490 = functions.checkNotFoundCase(re.search('Parse Notify Payload: NO_PROPOSAL_CHOSEN NOTIFY(NO_PROPOSAL_CHOSEN)', userLog))
+        l491 = functions.checkNotFoundCase(re.search('type: NO_PROPOSAL_CHOSEN', userLog))
+        l492 = functions.checkNotFoundCase(re.search('Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>', userLog))
+
 
         logs = {
             "10001": l10001,
@@ -58,12 +64,17 @@ class CheckCase():
             "13128": l13128,
             "13129": l13129,
             "13130": l13130,
-            "l13967":l13967,
-            "l13968":l13968,
-            "l13969":l13969,
-            "l13970":l13970,
-            "l13971":l13971,
-            "l13972":l13972,
+            "13931": l13931,
+            "13932": l13932,
+            "13967": l13967,
+            "13968": l13968,
+            "13969": l13969,
+            "13970": l13970,
+            "13971": l13971,
+            "13972": l13972,
+            "490": l490,
+            "491": l491,
+            "492": l492,
         }
 
         message = ""
@@ -73,10 +84,24 @@ class CheckCase():
         else:
             peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))
 
-        if logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"] or logs["11925"]:
+        # Case 106
+        if logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"]:
+            message = "PSK mismatch, verify that both peers have matching PSKs"
+
+        # Case 107
+        elif logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"] and logs["13973"]:
+            message = "Authentication failed because the authentication types between the peers do not match, make sure they are set to match PSK or Certificate."
+
+        # Case 108
+        elif logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"] and logs["13974"]:
+            message = ""
+
+        elif logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"] or logs["11925"]:
             message = "Remote end sent no proposal chosen, verify phase 1 policies match"
+
         elif logs["11003"] and logs["11008"] and logs["11917"] and logs["11918"]:
             message = "tunnel-group for peer %s missing keys" % peer
+
         elif logs["13128"] and logs["13129"] and logs["13130"]:
             espCompare1 = re.search('Received Policies:\nESP: Proposal 1:  (.+?)\n', userLog)
             espCompare2 = re.search('Expected Policies:\nESP: Proposal 0:  (.+?)\n', userLog)
@@ -124,10 +149,25 @@ class CheckCase():
 
         elif logs["11003"] and logs["11917"] and logs["11918"] :
              message = "tunnel-group for peer %s missing keys" % peer
+
         elif logs["13065"] and logs["13966"] :
             message = "Remote end not replying to UDP 500 init message, possible device in betwen blocking comunication or remote end configure for the wrong peer"
+
         elif logs["11904"] and logs["11907"]:
             message = "Tunnel-group not configured, verify there is a tunnel-group configured for IP %s" % peer
+
+        # Case 111
+        elif logs["490"] and logs["491"] :
+            message = "Phase 2 mismatch, verify that on the crypto map configuration the proper peer IP, ACLs and transform sets are configured"
+
+        # Case 109
+        elif logs["13931"] and logs["13932"] :
+            message = "Failure on Phase 1 as initiator, make sure ikev2 policies match as well as preshared key values. Or collect the debug as responder for a more detailed analysis."
+
+        # Case 110
+        elif logs["492"]:
+            message = "Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>"
+
         elif logs["10001"]:
             message = "Is initiator"
 
