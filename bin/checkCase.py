@@ -2,7 +2,7 @@ import re
 import lambdas, functions
 
 class CheckCase():
-    filePath = ""
+    filePath = "../pub/debugs/userlog2.txt"
     def __init__(self, filePath):
         self.filePath = filePath
     
@@ -82,7 +82,6 @@ class CheckCase():
             message = "Tunnel-group not configured, verify there is a tunnel-group configured for IP x.x.x.x" # Replace X for the true value
         elif logs["10001"]:
             message = "Is initiator"
-
         return message
 
 # ch = CheckCase('../pub/debugs/iniciator.txt')
