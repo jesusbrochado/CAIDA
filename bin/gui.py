@@ -154,7 +154,7 @@ class Application(ttk.Frame):
             frBotBot.grid_rowconfigure(3, weight=1)
             frBotBot.grid_columnconfigure(1, weight=1)
             
-            lblMssge = tk.Label(frBotBot,bg="#ffffff", text="Place holder",font=("Georgia", 10))
+            lblMssge = tk.Label(frBotBot,bg="#ffffff", text="CAIDA is a support tool for Network Admins & Engineers. If your network is live, make sure that you understand the potential impact of any command.",font=("Georgia", 10))
             lblMssge.grid(row=3, column=1, sticky="ew")
             lblMssge.grid_rowconfigure(3, weight=1)
 

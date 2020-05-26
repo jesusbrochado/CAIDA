@@ -20,14 +20,14 @@ def extractor(filePath):
     localIp = ""
 
     if iniciator:
-        peerSlice =  functions.checkNotFound(re.search('RECV PKT [IKE_SA_INIT] [(.+?)]:500', userLog))
-        peerIp = functions.checkNotFound(re.search('RECV PKT [IKE_SA_INIT] [(.+?)]:500', peerSlice))
-        localIp = functions.checkNotFound(re.search(']:500->[(.+?)]:500', peerSlice))
+        peerSlice =  re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\n', userLog).group(0)
+        peerIp = functions.checkNotFound(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\]:500', peerSlice))
+        localIp = functions.checkNotFound(re.search('\]:500->\[(.+?)\]:500', peerSlice))
     else:
-        peerSlice =  functions.checkNotFound(re.search('ending Packet [To (.+?):500/VRF i0:f0]', userLog))
-        peerIp = functions.checkNotFound(re.search('ending Packet [To (.+?)/', peerSlice))
-        localIp = functions.checkNotFound(re.search('/From (.+?):500/VRF i0:f0]', peerSlice))
-    
+        peerSlice =  functions.checkNotFound(re.search('ending Packet \[To (.+?)\n', userLog))
+        peerIp = functions.checkNotFound(re.search('ending Packet \[To (.+?)/', peerSlice))
+        localIp = functions.checkNotFound(re.search('/From (.+?):500/VRF i0:f0\]', peerSlice))
+   
 
     if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != TXTNoFound)):
         peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
@@ -89,7 +89,15 @@ def extractor(filePath):
     I_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', userLog))
     ## Add ignore some value for regex
     R_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog))
-    tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
+    tunelUp = False
+
+    if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog):
+        if re.search(r'flags: RESPONDER MSG-RESPONSE',userLog) and re.search(r'Payload contents:',userLog) and re.search(r'Next payload: DELETE',userLog):
+            tunelUp = False 
+        else:
+            tunelUp = True
+    else:  
+        tunelUp = False 
 
     #EXTRAER EN ARCHIVOS PEQUENIOS
     p1_prop_string = filterProposal('Protocol id: IKE, SPI size: ', 'Next payload: VID', filePath)
@@ -203,7 +211,7 @@ def extractor(filePath):
     }
 
     misc = {
-        "Local IP: ":peerIp,
+        "Local IP: ":localIp,
         "Peer IP: ": peerIp,
         "Idle Timeout: ": idleTimeout,
         "Session Timeout: ": sessionTimeout,
