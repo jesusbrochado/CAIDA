@@ -179,6 +179,11 @@ class CheckCase():
         elif logs["492"]:
             message = "Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>"
 
+        tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
+
+        if tunelUp:
+            #tunelUpMsg =
+
         return message
 
 

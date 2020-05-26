@@ -14,6 +14,21 @@ def extractor(filePath):
     # Here we extract key data from the string get userLog that user enter to the system.
     iniciator = True if re.search(r'EV_INIT_SA',userLog) else  False
 
+
+    peerSlice = ""
+    peerIp = ""
+    localIp = ""
+
+    if iniciator:
+        peerSlice =  functions.checkNotFound(re.search('RECV PKT [IKE_SA_INIT] [(.+?)]:500', userLog))
+        peerIp = functions.checkNotFound(re.search('RECV PKT [IKE_SA_INIT] [(.+?)]:500', peerSlice))
+        localIp = functions.checkNotFound(re.search(']:500->[(.+?)]:500', peerSlice))
+    else:
+        peerSlice =  functions.checkNotFound(re.search('ending Packet [To (.+?):500/VRF i0:f0]', userLog))
+        peerIp = functions.checkNotFound(re.search('ending Packet [To (.+?)/', peerSlice))
+        localIp = functions.checkNotFound(re.search('/From (.+?):500/VRF i0:f0]', peerSlice))
+    
+
     if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != TXTNoFound)):
         peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
     else:
@@ -74,7 +89,7 @@ def extractor(filePath):
     I_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=(.+?) R_SPI=', userLog))
     ## Add ignore some value for regex
     R_SPI = functions.checkNotFound(re.search('SM Trace-> SA: I_SPI=' + I_SPI + ' R_SPI=(.+?) \(I\) MsgID = 00000001 CurState: READY Event:', userLog))
-    tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) else  False
+    tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
 
     #EXTRAER EN ARCHIVOS PEQUENIOS
     p1_prop_string = filterProposal('Protocol id: IKE, SPI size: ', 'Next payload: VID', filePath)
@@ -188,6 +203,8 @@ def extractor(filePath):
     }
 
     misc = {
+        "Local IP: ":peerIp,
+        "Peer IP: ": peerIp,
         "Idle Timeout: ": idleTimeout,
         "Session Timeout: ": sessionTimeout,
         "Matched Group-Policy: ": nameGroupPolicy,
