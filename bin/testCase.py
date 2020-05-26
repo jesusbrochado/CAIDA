@@ -41,11 +41,6 @@ print("========= Mismatch_encry_hash_prf =======================================
 res = CheckCase('../logs/Mismatch_encry_hash_prf.txt')
 print(res.extractInfo())
 
-print("========= P1Mismatch_2 =====================================================")
-
-res = CheckCase('../logs/P1Mismatch_2.txt')
-print(res.extractInfo())
-
 print("========= P1MismatchInit =====================================================")
 
 res = CheckCase('../logs/P1MismatchInit.txt')
@@ -64,11 +59,6 @@ print(res.extractInfo())
 print("========== PSK_Mismatch_resp ====================================================")
 
 res = CheckCase('../logs/PSK_Mismatch_resp.txt')
-print(res.extractInfo())
-
-print("========== PSK_REsponder ====================================================")
-
-res = CheckCase('../logs/PSK_REsponder.txt')
 print(res.extractInfo())
 
 print("========= TSet_Mismatch_initiator =====================================================")

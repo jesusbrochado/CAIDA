@@ -5,7 +5,7 @@ class CheckCase():
     filePath = ""
     def __init__(self, filePath):
         self.filePath = filePath
-    
+
     # function of the case
     def extractInfo(self):
         filePath = self.filePath
@@ -25,23 +25,26 @@ class CheckCase():
         l11922 = functions.checkNotFoundCase(re.search('Negotiating SA request deleted', userLog))
         l11923 = functions.checkNotFoundCase(re.search('Abort exchange', userLog))
         l11925 = functions.checkNotFoundCase(re.search('NO_PROPOSAL_CHOSEN NOTIFY(NO_PROPOSAL_CHOSEN)', userLog))
-        l13065 = functions.checkNotFoundCase(re.search('I_SPI=DCA635040E30A6A3 R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT', userLog))
-        l13066 = functions.checkNotFoundCase(re.search('Retransmitting packet', userLog))
+        l13065 = functions.checkNotFoundCase(re.search('R_SPI=0000000000000000 \(I\) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT', userLog))
         l13128 = functions.checkNotFoundCase(re.search('Received Policies', userLog))
         l13129 = functions.checkNotFoundCase(re.search('Failed to find a matching policy', userLog))
         l13130 = functions.checkNotFoundCase(re.search('Expected Policies', userLog))
         l13931 = functions.checkNotFoundCase(re.search('Failed SA init exchange', userLog))
         l13932 = functions.checkNotFoundCase(re.search('Initial exchange failed', userLog))
+        l13966 = functions.checkNotFoundCase(re.search('Retransmitting packet', userLog))
         l13967 = functions.checkNotFoundCase(re.search('Parse Notify Payload: AUTHENTICATION_FAILED NOTIFY(AUTHENTICATION_FAILED)', userLog))
         l13968 = functions.checkNotFoundCase(re.search('Failed to authenticate the IKE SA', userLog))
         l13969 = functions.checkNotFoundCase(re.search('Verify auth failed', userLog))
         l13970 = functions.checkNotFoundCase(re.search('Sending authentication failure notify', userLog))
         l13971 = functions.checkNotFoundCase(re.search('Auth exchange failed', userLog))
         l13972 = functions.checkNotFoundCase(re.search('Failed to receive the AUTH msg before the timer expired', userLog))
-        l490 = functions.checkNotFoundCase(re.search('Parse Notify Payload: NO_PROPOSAL_CHOSEN NOTIFY(NO_PROPOSAL_CHOSEN)', userLog))
+        l13973 = functions.checkNotFoundCase(re.search('Peer authentication method configured is mismatching with the method proposed by peer', userLog))
+        l13974 = functions.checkNotFoundCase(re.search('Computed authentication value for peer differs from what peer sent', userLog))
+        l13975 = functions.checkNotFoundCase(re.search('\(AUTHENTICATION_FAILED\)', userLog))
+        l490 = functions.checkNotFoundCase(re.search('Parse Notify Payload: NO_PROPOSAL_CHOSEN NOTIFY\(NO_PROPOSAL_CHOSEN\)', userLog))
         l491 = functions.checkNotFoundCase(re.search('type: NO_PROPOSAL_CHOSEN', userLog))
         l492 = functions.checkNotFoundCase(re.search('Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>', userLog))
-
+        
 
         logs = {
             "10001": l10001,
@@ -60,18 +63,21 @@ class CheckCase():
             "11923": l11923,
             "11925": l11925,
             "13065": l13065,
-            "13066": l13066,
             "13128": l13128,
             "13129": l13129,
             "13130": l13130,
             "13931": l13931,
             "13932": l13932,
+            "13966": l13966,
             "13967": l13967,
             "13968": l13968,
             "13969": l13969,
             "13970": l13970,
             "13971": l13971,
             "13972": l13972,
+            "13973":l13973,
+            "13974": l13974,
+            "13975": l13975,
             "490": l490,
             "491": l491,
             "492": l492,
@@ -84,19 +90,23 @@ class CheckCase():
         else:
             peer = functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog))
 
+        # ==============================================
+        # The Case check begin here
+        # ==============================================
+
         # Case 106
         if logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"]:
             message = "PSK mismatch, verify that both peers have matching PSKs"
 
         # Case 107
-        elif logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"] and logs["13973"]:
+        elif logs["13970"] and logs["13971"] and logs["13973"] and logs["13975"]:
             message = "Authentication failed because the authentication types between the peers do not match, make sure they are set to match PSK or Certificate."
 
         # Case 108
-        elif logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"] and logs["13974"]:
-            message = ""
+        elif logs["13975"] and logs["13968"] and logs["13970"] and logs["13971"] and logs["13974"]:
+            message = "Authentication failed because of a pre-shared-key mismatch"
 
-        elif logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"] or logs["11925"]:
+        elif logs["11919"] and logs["11920"] and logs["11921"] and logs["11922"] and logs["11923"]: # or logs["11925"]
             message = "Remote end sent no proposal chosen, verify phase 1 policies match"
 
         elif logs["11003"] and logs["11008"] and logs["11917"] and logs["11918"]:
@@ -150,7 +160,8 @@ class CheckCase():
         elif logs["11003"] and logs["11917"] and logs["11918"] :
              message = "tunnel-group for peer %s missing keys" % peer
 
-        elif logs["13065"] and logs["13966"] :
+        # Case 105
+        elif logs["13065"] and logs["13966"]:
             message = "Remote end not replying to UDP 500 init message, possible device in betwen blocking comunication or remote end configure for the wrong peer"
 
         elif logs["11904"] and logs["11907"]:
@@ -167,9 +178,6 @@ class CheckCase():
         # Case 110
         elif logs["492"]:
             message = "Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>"
-
-        elif logs["10001"]:
-            message = "Is initiator"
 
         return message
 
