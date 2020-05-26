@@ -2,7 +2,7 @@ import re
 import lambdas, functions
 
 class CheckCase():
-    filePath = ""
+    filePath = "../pub/debugs/userlog2.txt"
     def __init__(self, filePath):
         self.filePath = filePath
 
@@ -180,8 +180,7 @@ class CheckCase():
             message = "Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>"
 
         tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
-
-        if tunelUp:
+        #if tunelUp:
             #tunelUpMsg =
 
         return message

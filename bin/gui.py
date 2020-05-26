@@ -6,6 +6,7 @@ from tkinter import ttk, Entry, filedialog
 #from code import functions, lambdas
 import functions, lambdas
 import infoExtractor
+from checkCase import CheckCase
 from infoExtractor import extractor
 from tkinter import LEFT
 
@@ -19,10 +20,14 @@ class Application(ttk.Frame):
             main_window.minsize(width=1200, height=650)
             main_window['bg']='green'
 
+            
             res = [{}, {}, {}]
             self.fase1 = res[0]
             self.fase2 = res[1]
             self.misc = res[2]
+
+            
+            
             
             #Frame top
             frTop = tk.Frame(self,bg="#f4f7ff",width=120, height=80)
@@ -177,17 +182,19 @@ class Application(ttk.Frame):
 
         def run(self):
             filePath = filedialog.askopenfilename()
+            mess = CheckCase(filePath).extractInfo()
             res = extractor(filePath)
             self.fase1 = res[0]
             self.fase2 = res[1]
             self.misc = res[2]
+            
+
 
             #Print phase1, phase2 and misc in Gui
             self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase1.items())
             self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.misc.items())
             self.lblPhase2['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items())
-
-
+            self.lblConf['text'] = mess
 
 main_window = tk.Tk()
 app = Application(main_window)
