@@ -1,0 +1,275 @@
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_RE_XMT
+IKEv2-PROTO-2: (2): Retransmitting packet
+(2):
+IKEv2-PROTO-2: (2): Sending Packet [To 30.30.30.1:500/From 20.20.20.1:500/VRF i0:f0]
+(2): Initiator SPI : 20D2257F50296ABD - Responder SPI : 0000000000000000 Message id: 0
+(2): IKEv2 IKE_SA_INIT Exchange REQUESTIKEv2-PROTO-3: (2): Next payload: SA, version: 2.0 (2): Exchange type: IKE_SA_INIT, flags: INITIATOR (2): Message id: 0, length: 566(2):
+Payload contents:
+(2):  SA(2):   Next payload: KE, reserved: 0x0, length: 48
+(2):   last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4(2):     last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+(2):     last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+(2):  KE(2):   Next payload: N, reserved: 0x0, length: 264
+(2):     DH group: 14, Reserved: 0x0
+(2):
+(2):      fc d2 9f 46 f1 c5 ff a2 15 6c 2f ed e1 65 4f b4
+(2):      a9 49 c5 b9 2c a1 0b 0f 69 7b a9 7f c6 6d 15 ee
+(2):      fb 88 90 a1 8c 99 79 83 90 7a c6 5d b8 6f ef 5e
+(2):      3e 8f 7c 64 27 f0 89 fa 81 6f 96 1e bc 03 e3 51
+(2):      47 c5 33 e7 27 3c 7f 7b b5 12 be bb 5b 0b d4 ef
+(2):      95 95 8f fd f9 9a f8 15 24 96 11 f2 5c 20 3d 00
+(2):      d8 cc 0b 69 5f 90 73 59 04 e6 28 75 fd 10 e7 e5
+(2):      fe cd 1f 09 d1 89 45 1b 75 23 5c a0 25 12 cc b9
+(2):      13 36 7e 2c 9e af 98 00 b4 fd 3e e6 a0 69 c8 0a
+(2):      cb e2 8e a0 10 98 97 90 28 36 35 46 2c 11 d7 c1
+(2):      bc e3 0a 78 0d 3d 36 68 dd 5d e0 4c 63 2e 68 50
+(2):      b0 84 60 0b 5c 2a 0a 8a 7a 54 4c 7b 94 dd c7 17
+(2):      ca d2 40 89 fb 8f fc 01 73 4d c3 6f 45 81 54 cf
+(2):      fd 86 20 a5 3c 31 f5 d6 f3 ad 06 02 b9 dc d9 cf
+(2):      74 bf 6e 24 52 22 80 a0 68 2f c8 83 6d e8 a4 75
+(2):      2e 87 0c a2 48 6e 57 6d a3 ba bf d3 19 89 60 f8
+(2):  N(2):   Next payload: VID, reserved: 0x0, length: 68
+(2):
+(2):      9d fa 80 80 5b 0e 61 72 30 35 c5 ab 38 40 28 b1
+(2):      2e 64 8d ee e0 e7 53 85 5f 5b e0 40 bd dd 7e cd
+(2):      95 8d 83 3c 5b 06 5a 77 a1 59 24 9e b5 03 0a 6c
+(2):      fb 75 22 e7 3b b7 02 bf 1b 87 73 08 f2 be e8 3b
+(2):  VID(2):   Next payload: VID, reserved: 0x0, length: 23
+(2):
+(2):      43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+(2):      53 4f 4e
+(2):  VID(2):   Next payload: NOTIFY, reserved: 0x0, length: 59
+(2):
+(2):      43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+(2):      26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+(2):      30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+(2):      73 2c 20 49 6e 63 2e
+(2):  NOTIFY(NAT_DETECTION_SOURCE_IP)(2):   Next payload: NOTIFY, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+(2):
+(2):      e4 4d de 94 77 ff f5 d5 ba ed c4 23 ee 83 29 bb
+(2):      69 85 95 7a
+(2):  NOTIFY(NAT_DETECTION_DESTINATION_IP)(2):   Next payload: VID, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+(2):
+(2):      6e 49 f0 54 7e 1e 91 be 2b 58 51 2d 0c 39 5f 43
+(2):      cf d7 58 0e
+(2):  VID(2):   Next payload: NONE, reserved: 0x0, length: 20
+(2):
+(2):      40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+(2):
+IKEv2-PLAT-3: (2): SENT PKT [IKE_SA_INIT] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x20d2257f50296abd RespSPI=0x0000000000000000 MID=00000000
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT
+
+Warning: ASAv platform license state is Unlicensed.
+Install ASAv platform license for full functionality.
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_RE_XMT
+IKEv2-PROTO-2: (2): Retransmitting packet
+(2):
+IKEv2-PROTO-2: (2): Sending Packet [To 30.30.30.1:500/From 20.20.20.1:500/VRF i0:f0]
+(2): Initiator SPI : 20D2257F50296ABD - Responder SPI : 0000000000000000 Message id: 0
+(2): IKEv2 IKE_SA_INIT Exchange REQUESTIKEv2-PROTO-3: (2): Next payload: SA, version: 2.0 (2): Exchange type: IKE_SA_INIT, flags: INITIATOR (2): Message id: 0, length: 566(2):
+Payload contents:
+(2):  SA(2):   Next payload: KE, reserved: 0x0, length: 48
+(2):   last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4(2):     last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+(2):     last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+(2):  KE(2):   Next payload: N, reserved: 0x0, length: 264
+(2):     DH group: 14, Reserved: 0x0
+(2):
+(2):      fc d2 9f 46 f1 c5 ff a2 15 6c 2f ed e1 65 4f b4
+(2):      a9 49 c5 b9 2c a1 0b 0f 69 7b a9 7f c6 6d 15 ee
+(2):      fb 88 90 a1 8c 99 79 83 90 7a c6 5d b8 6f ef 5e
+(2):      3e 8f 7c 64 27 f0 89 fa 81 6f 96 1e bc 03 e3 51
+(2):      47 c5 33 e7 27 3c 7f 7b b5 12 be bb 5b 0b d4 ef
+(2):      95 95 8f fd f9 9a f8 15 24 96 11 f2 5c 20 3d 00
+(2):      d8 cc 0b 69 5f 90 73 59 04 e6 28 75 fd 10 e7 e5
+(2):      fe cd 1f 09 d1 89 45 1b 75 23 5c a0 25 12 cc b9
+(2):      13 36 7e 2c 9e af 98 00 b4 fd 3e e6 a0 69 c8 0a
+(2):      cb e2 8e a0 10 98 97 90 28 36 35 46 2c 11 d7 c1
+(2):      bc e3 0a 78 0d 3d 36 68 dd 5d e0 4c 63 2e 68 50
+(2):      b0 84 60 0b 5c 2a 0a 8a 7a 54 4c 7b 94 dd c7 17
+(2):      ca d2 40 89 fb 8f fc 01 73 4d c3 6f 45 81 54 cf
+(2):      fd 86 20 a5 3c 31 f5 d6 f3 ad 06 02 b9 dc d9 cf
+(2):      74 bf 6e 24 52 22 80 a0 68 2f c8 83 6d e8 a4 75
+(2):      2e 87 0c a2 48 6e 57 6d a3 ba bf d3 19 89 60 f8
+(2):  N(2):   Next payload: VID, reserved: 0x0, length: 68
+(2):
+(2):      9d fa 80 80 5b 0e 61 72 30 35 c5 ab 38 40 28 b1
+(2):      2e 64 8d ee e0 e7 53 85 5f 5b e0 40 bd dd 7e cd
+(2):      95 8d 83 3c 5b 06 5a 77 a1 59 24 9e b5 03 0a 6c
+(2):      fb 75 22 e7 3b b7 02 bf 1b 87 73 08 f2 be e8 3b
+(2):  VID(2):   Next payload: VID, reserved: 0x0, length: 23
+(2):
+(2):      43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+(2):      53 4f 4e
+(2):  VID(2):   Next payload: NOTIFY, reserved: 0x0, length: 59
+(2):
+(2):      43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+(2):      26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+(2):      30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+(2):      73 2c 20 49 6e 63 2e
+(2):  NOTIFY(NAT_DETECTION_SOURCE_IP)(2):   Next payload: NOTIFY, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+(2):
+(2):      e4 4d de 94 77 ff f5 d5 ba ed c4 23 ee 83 29 bb
+(2):      69 85 95 7a
+(2):  NOTIFY(NAT_DETECTION_DESTINATION_IP)(2):   Next payload: VID, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+(2):
+(2):      6e 49 f0 54 7e 1e 91 be 2b 58 51 2d 0c 39 5f 43
+(2):      cf d7 58 0e
+(2):  VID(2):   Next payload: NONE, reserved: 0x0, length: 20
+(2):
+(2):      40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+(2):
+IKEv2-PLAT-3: (2): SENT PKT [IKE_SA_INIT] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x20d2257f50296abd RespSPI=0x0000000000000000 MID=00000000
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_RE_XMT
+IKEv2-PROTO-2: (2): Retransmitting packet
+(2):
+IKEv2-PROTO-2: (2): Sending Packet [To 30.30.30.1:500/From 20.20.20.1:500/VRF i0:f0]
+(2): Initiator SPI : 20D2257F50296ABD - Responder SPI : 0000000000000000 Message id: 0
+(2): IKEv2 IKE_SA_INIT Exchange REQUESTIKEv2-PROTO-3: (2): Next payload: SA, version: 2.0 (2): Exchange type: IKE_SA_INIT, flags: INITIATOR (2): Message id: 0, length: 566(2):
+Payload contents:
+(2):  SA(2):   Next payload: KE, reserved: 0x0, length: 48
+(2):   last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4(2):     last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+(2):     last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+(2):  KE(2):   Next payload: N, reserved: 0x0, length: 264
+(2):     DH group: 14, Reserved: 0x0
+(2):
+(2):      fc d2 9f 46 f1 c5 ff a2 15 6c 2f ed e1 65 4f b4
+(2):      a9 49 c5 b9 2c a1 0b 0f 69 7b a9 7f c6 6d 15 ee
+(2):      fb 88 90 a1 8c 99 79 83 90 7a c6 5d b8 6f ef 5e
+(2):      3e 8f 7c 64 27 f0 89 fa 81 6f 96 1e bc 03 e3 51
+(2):      47 c5 33 e7 27 3c 7f 7b b5 12 be bb 5b 0b d4 ef
+(2):      95 95 8f fd f9 9a f8 15 24 96 11 f2 5c 20 3d 00
+(2):      d8 cc 0b 69 5f 90 73 59 04 e6 28 75 fd 10 e7 e5
+(2):      fe cd 1f 09 d1 89 45 1b 75 23 5c a0 25 12 cc b9
+(2):      13 36 7e 2c 9e af 98 00 b4 fd 3e e6 a0 69 c8 0a
+(2):      cb e2 8e a0 10 98 97 90 28 36 35 46 2c 11 d7 c1
+(2):      bc e3 0a 78 0d 3d 36 68 dd 5d e0 4c 63 2e 68 50
+(2):      b0 84 60 0b 5c 2a 0a 8a 7a 54 4c 7b 94 dd c7 17
+(2):      ca d2 40 89 fb 8f fc 01 73 4d c3 6f 45 81 54 cf
+(2):      fd 86 20 a5 3c 31 f5 d6 f3 ad 06 02 b9 dc d9 cf
+(2):      74 bf 6e 24 52 22 80 a0 68 2f c8 83 6d e8 a4 75
+(2):      2e 87 0c a2 48 6e 57 6d a3 ba bf d3 19 89 60 f8
+(2):  N(2):   Next payload: VID, reserved: 0x0, length: 68
+(2):
+(2):      9d fa 80 80 5b 0e 61 72 30 35 c5 ab 38 40 28 b1
+(2):      2e 64 8d ee e0 e7 53 85 5f 5b e0 40 bd dd 7e cd
+(2):      95 8d 83 3c 5b 06 5a 77 a1 59 24 9e b5 03 0a 6c
+(2):      fb 75 22 e7 3b b7 02 bf 1b 87 73 08 f2 be e8 3b
+(2):  VID(2):   Next payload: VID, reserved: 0x0, length: 23
+(2):
+(2):      43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+(2):      53 4f 4e
+(2):  VID(2):   Next payload: NOTIFY, reserved: 0x0, length: 59
+(2):
+(2):      43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+(2):      26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+(2):      30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+(2):      73 2c 20 49 6e 63 2e
+(2):  NOTIFY(NAT_DETECTION_SOURCE_IP)(2):   Next payload: NOTIFY, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+(2):
+(2):      e4 4d de 94 77 ff f5 d5 ba ed c4 23 ee 83 29 bb
+(2):      69 85 95 7a
+(2):  NOTIFY(NAT_DETECTION_DESTINATION_IP)(2):   Next payload: VID, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+(2):
+(2):      6e 49 f0 54 7e 1e 91 be 2b 58 51 2d 0c 39 5f 43
+(2):      cf d7 58 0e
+(2):  VID(2):   Next payload: NONE, reserved: 0x0, length: 20
+(2):
+(2):      40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+(2):
+IKEv2-PLAT-3: (2): SENT PKT [IKE_SA_INIT] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x20d2257f50296abd RespSPI=0x0000000000000000 MID=00000000
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_RE_XMT
+IKEv2-PROTO-2: (2): Retransmitting packet
+(2):
+IKEv2-PROTO-2: (2): Sending Packet [To 30.30.30.1:500/From 20.20.20.1:500/VRF i0:f0]
+(2): Initiator SPI : 20D2257F50296ABD - Responder SPI : 0000000000000000 Message id: 0
+(2): IKEv2 IKE_SA_INIT Exchange REQUESTIKEv2-PROTO-3: (2): Next payload: SA, version: 2.0 (2): Exchange type: IKE_SA_INIT, flags: INITIATOR (2): Message id: 0, length: 566(2):
+Payload contents:
+(2):  SA(2):   Next payload: KE, reserved: 0x0, length: 48
+(2):   last proposal: 0x0, reserved: 0x0, length: 44
+  Proposal: 1, Protocol id: IKE, SPI size: 0, #trans: 4(2):     last transform: 0x3, reserved: 0x0: length: 12
+    type: 1, reserved: 0x0, id: AES-CBC
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 2, reserved: 0x0, id: SHA1
+(2):     last transform: 0x3, reserved: 0x0: length: 8
+    type: 3, reserved: 0x0, id: SHA256
+(2):     last transform: 0x0, reserved: 0x0: length: 8
+    type: 4, reserved: 0x0, id: DH_GROUP_2048_MODP/Group 14
+(2):  KE(2):   Next payload: N, reserved: 0x0, length: 264
+(2):     DH group: 14, Reserved: 0x0
+(2):
+(2):      fc d2 9f 46 f1 c5 ff a2 15 6c 2f ed e1 65 4f b4
+(2):      a9 49 c5 b9 2c a1 0b 0f 69 7b a9 7f c6 6d 15 ee
+(2):      fb 88 90 a1 8c 99 79 83 90 7a c6 5d b8 6f ef 5e
+(2):      3e 8f 7c 64 27 f0 89 fa 81 6f 96 1e bc 03 e3 51
+(2):      47 c5 33 e7 27 3c 7f 7b b5 12 be bb 5b 0b d4 ef
+(2):      95 95 8f fd f9 9a f8 15 24 96 11 f2 5c 20 3d 00
+(2):      d8 cc 0b 69 5f 90 73 59 04 e6 28 75 fd 10 e7 e5
+(2):      fe cd 1f 09 d1 89 45 1b 75 23 5c a0 25 12 cc b9
+(2):      13 36 7e 2c 9e af 98 00 b4 fd 3e e6 a0 69 c8 0a
+(2):      cb e2 8e a0 10 98 97 90 28 36 35 46 2c 11 d7 c1
+(2):      bc e3 0a 78 0d 3d 36 68 dd 5d e0 4c 63 2e 68 50
+(2):      b0 84 60 0b 5c 2a 0a 8a 7a 54 4c 7b 94 dd c7 17
+(2):      ca d2 40 89 fb 8f fc 01 73 4d c3 6f 45 81 54 cf
+(2):      fd 86 20 a5 3c 31 f5 d6 f3 ad 06 02 b9 dc d9 cf
+(2):      74 bf 6e 24 52 22 80 a0 68 2f c8 83 6d e8 a4 75
+(2):      2e 87 0c a2 48 6e 57 6d a3 ba bf d3 19 89 60 f8
+(2):  N(2):   Next payload: VID, reserved: 0x0, length: 68
+(2):
+(2):      9d fa 80 80 5b 0e 61 72 30 35 c5 ab 38 40 28 b1
+(2):      2e 64 8d ee e0 e7 53 85 5f 5b e0 40 bd dd 7e cd
+(2):      95 8d 83 3c 5b 06 5a 77 a1 59 24 9e b5 03 0a 6c
+(2):      fb 75 22 e7 3b b7 02 bf 1b 87 73 08 f2 be e8 3b
+(2):  VID(2):   Next payload: VID, reserved: 0x0, length: 23
+(2):
+(2):      43 49 53 43 4f 2d 44 45 4c 45 54 45 2d 52 45 41
+(2):      53 4f 4e
+(2):  VID(2):   Next payload: NOTIFY, reserved: 0x0, length: 59
+(2):
+(2):      43 49 53 43 4f 28 43 4f 50 59 52 49 47 48 54 29
+(2):      26 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32
+(2):      30 30 39 20 43 69 73 63 6f 20 53 79 73 74 65 6d
+(2):      73 2c 20 49 6e 63 2e
+(2):  NOTIFY(NAT_DETECTION_SOURCE_IP)(2):   Next payload: NOTIFY, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_SOURCE_IP
+(2):
+(2):      e4 4d de 94 77 ff f5 d5 ba ed c4 23 ee 83 29 bb
+(2):      69 85 95 7a
+(2):  NOTIFY(NAT_DETECTION_DESTINATION_IP)(2):   Next payload: VID, reserved: 0x0, length: 28
+(2):     Security protocol id: IKE, spi size: 0, type: NAT_DETECTION_DESTINATION_IP
+(2):
+(2):      6e 49 f0 54 7e 1e 91 be 2b 58 51 2d 0c 39 5f 43
+(2):      cf d7 58 0e
+(2):  VID(2):   Next payload: NONE, reserved: 0x0, length: 20
+(2):
+(2):      40 48 b7 d5 6e bc e8 85 25 e7 de 7f 00 d6 c2 d3
+(2):
+IKEv2-PLAT-3: (2): SENT PKT [IKE_SA_INIT] [20.20.20.1]:500->[30.30.30.1]:500 InitSPI=0x20d2257f50296abd RespSPI=0x0000000000000000 MID=00000000
+IKEv2-PROTO-5: (2): SM Trace-> SA: I_SPI=20D2257F50296ABD R_SPI=0000000000000000 (I) MsgID = 00000000 CurState: I_WAIT_INIT Event: EV_NO_EVENT
