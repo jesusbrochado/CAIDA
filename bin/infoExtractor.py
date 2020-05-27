@@ -24,10 +24,10 @@ def extractor(filePath):
         peerIp = functions.checkNotFound(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\]:500', peerSlice))
         localIp = functions.checkNotFound(re.search('\]:500->\[(.+?)\]:500', peerSlice))
     else:
-        peerSlice =  functions.checkNotFound(re.search('ending Packet \[To (.+?)\n', userLog))
-        peerIp = functions.checkNotFound(re.search('ending Packet \[To (.+?)/', peerSlice))
+        peerSlice =  re.search('ending Packet \[To (.+?)\n', userLog).group(0)
+        peerIp = functions.checkNotFound(re.search('ending Packet \[To(.+?):500/', peerSlice))
         localIp = functions.checkNotFound(re.search('/From (.+?):500/VRF i0:f0\]', peerSlice))
-   
+
 
     if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != TXTNoFound)):
         peer = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', userLog))
@@ -139,6 +139,7 @@ def extractor(filePath):
 
     #INTERSTING TRAFFIC
     local_sa_sent = functions.checkNotFoundArray(re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_local))
+    local_sa_sent = local_sa_sent[0][0] if local_sa_sent !=  "Not found" else "Not found"
 
     if(sa_traffic_init_remote is not None and sa_traffic_init_remote != TXTNoFound):
         remote_sa_sent = re.findall('start addr: (.+?), end addr: (.+?)\n', sa_traffic_init_remote)
@@ -163,9 +164,16 @@ def extractor(filePath):
     if(len(agreed_sa_remote) == 0):
         agreed_sa_remote = [remote_sa_sent[-1]] if len(remote_sa_sent) > 0 else TXTNoFound
 
+    remote_sa_sent = remote_sa_sent[0][1] if remote_sa_sent !=  "Not found" else "Not found"
+
+    tunnelMsg = ""
+    tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
+    if tunelUp:
+        tunnelMsg = "Tunnel seems to be up! Here are some useful commands:\n\n=== Verify overall VPN ===\nshow vpn-sessiondb detail l2l filter name %s\n=== Verify your crypto counters through the tunnel ===\nshow crypto ipsec sa peer %s | i caps|ident\n=== Check traffic is hitting the right NAT and phases ===\npacket-tracer input inside icmp %s 8 0 %s detail\n=== Verify traffic on outside interface with captures ===\ncapture OUT interface outside match ip host %s host %s"  % (peerIp, peerIp, local_sa_sent, remote_sa_sent, peerIp, localIp)
+
+
     fase1 = {
         "Are we initiators: ": iniciator,
-        "Peer: ": peer,
         # Revisar por que extraimos esto, parece que se corrompio
         # "Phase 1 proposals": proposal_phase_1,
         "Authentication Method: ": proposalType,
@@ -202,9 +210,9 @@ def extractor(filePath):
         "p2_proposal_hash: ": p2_proposal_hash,
         "p2_proposal_esn: ": p2_proposal_esn,
         ## Interesting Traffic Local  Sent
-        "Local remote trigger IP: ": local_sa_sent[0][0] if local_sa_sent !=  "Not found" else "Not found",
+        "Local trigger IP: ": local_sa_sent,
         ## Interesting Traffic Remote  Sent
-        "Remote remote trigger IP: ": remote_sa_sent[0][1] if remote_sa_sent !=  "Not found" else "Not found",
+        "Remote trigger IP: ": remote_sa_sent,
         ## AGREED INTERSTING TRAFFIC
         "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[0][0], agreed_sa_local[0][1]) if agreed_sa_local !=  "Not found" else "Not found",
         "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[0][0], agreed_sa_remote[0][1]) if agreed_sa_remote !=  "Not found" else "Not found"
@@ -222,7 +230,7 @@ def extractor(filePath):
         "Tunnel established!: ": tunelUp,
     }
 
-    return [fase1, fase2, misc]
+    return [fase1, fase2, misc, tunnelMsg]
 
 def filterProposal(match_start, match_end, filePath):
     debug_file = open(filePath)

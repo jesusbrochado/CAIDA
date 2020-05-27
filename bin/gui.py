@@ -21,10 +21,11 @@ class Application(ttk.Frame):
             main_window['bg']='green'
 
             
-            res = [{}, {}, {}]
+            res = [{}, {}, {}, {}]
             self.fase1 = res[0]
             self.fase2 = res[1]
             self.misc = res[2]
+            self.tunnelMsg = res[3]
 
             
             
@@ -187,14 +188,14 @@ class Application(ttk.Frame):
             self.fase1 = res[0]
             self.fase2 = res[1]
             self.misc = res[2]
+            self.tunnelMsg = res[3]
             
-
 
             #Print phase1, phase2 and misc in Gui
             self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase1.items())
             self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.misc.items())
             self.lblPhase2['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items())
-            self.lblConf['text'] = mess
+            self.lblConf['text'] = "%s\n\n%s" % (mess, self.tunnelMsg)
 
 main_window = tk.Tk()
 app = Application(main_window)

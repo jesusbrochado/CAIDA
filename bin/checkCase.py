@@ -118,6 +118,13 @@ class CheckCase():
             compare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog)
             compare2 = re.search('Expected Policies:\nProposal 1:  (.+?)\n', userLog)
 
+            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+
             if compare1 is not None and compare2 is not None:
                 compare1 = compare1.group(0)
                 compare2 = compare2.group(0)
@@ -178,10 +185,6 @@ class CheckCase():
         # Case 110
         elif logs["492"]:
             message = "Crypto map <VARIABLE1> seq <SEQ> is incomplete due to <VARIABLE2>"
-
-        tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
-        #if tunelUp:
-            #tunelUpMsg =
 
         return message
 
