@@ -113,10 +113,31 @@ class CheckCase():
             message = "tunnel-group for peer %s missing keys" % peer
 
         elif logs["13128"] and logs["13129"] and logs["13130"]:
+
+
+            # i = 1
+            # proposals = re.search('Expected Policies:\nProposal %i:(.+?)\n' % i, userLog)#.group(1)
+
+            # # Proposal 1:  AES-CBC-256 SHA1 SHA256 DH_GROUP_2048_MODP/Group 14
+
+            # # Proposal 2:  AES-CBC-128 SHA1 SHA256 DH_GROUP_1536_MODP/Group 5
+
+            # while proposals is not None:
+            #     proposals = proposals.group(1)
+            #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            #     print(proposals)
+            #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            #     i = i+1
+            #     proposals = re.search('%s\n\nProposal %i:(.+?)\n' % (proposals, i), userLog)
+
+            # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
             espCompare1 = re.search('Received Policies:\nESP: Proposal 1:  (.+?)\n', userLog)
             espCompare2 = re.search('Expected Policies:\nESP: Proposal 0:  (.+?)\n', userLog)
             compare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog)
             compare2 = re.search('Expected Policies:\nProposal 1:  (.+?)\n', userLog)
+
+            
 
             # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
             # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
@@ -189,5 +210,5 @@ class CheckCase():
         return message
 
 
-# ch = CheckCase('../pub/debugs/resp_error_no_peer_crymap_Nat-T.txt')
-# print(ch.extractInfo())
+ch = CheckCase('../logs/Encryption_ThenEncryptionAndGroup.txt')
+print(ch.extractInfo())
