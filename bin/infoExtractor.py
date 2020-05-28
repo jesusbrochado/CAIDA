@@ -101,7 +101,7 @@ def extractor(filePath):
 
     #EXTRAER EN ARCHIVOS PEQUENIOS
     p1_prop_string = filterProposal('Protocol id: IKE, SPI size: ', 'Next payload: VID', filePath)
-    p1_resp = filterProposal('Exchange type: IKE_SA_INIT, flags: RESPONDER MSG-RESPONSE', 'Next payload: VID', filePath)
+    p1_resp = filterProposal('Exchange type: IKE_SA_INIT, flags: ', 'Next payload: VID', filePath)
     p2_prop = filterProposal('Protocol id: ESP, SPI size:', '\):   Next payload: TSr', filePath)
     sa_traffic_init_local = filterProposal('\):   Next payload: TSr', 'TSr(.+?):   Next payload: NOTIFY, reserve', filePath)
     sa_traffic_init_remote = filterProposal('TSr(.+?):   Next payload: NOTIFY, reserve', 'NOTIFY\(INITIAL_CONTACT\)', filePath)
@@ -121,6 +121,11 @@ def extractor(filePath):
     #LOAD PHASE 1 RESP
     p1_proposal_resp = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_resp))
     p1_proposal_encryption_resp = functions.checkNotFoundArray(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_resp))
+
+
+    print("$$$$$$$$$$$$$$$$$$$$$$")
+    print(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_resp))
+
     p1_proposal_prf_resp = functions.checkNotFoundArray( re.findall('type: 2, reserved: 0x0, id: (.+?)\n', p1_resp))
     p1_proposal_integrity_resp = functions.checkNotFoundArray(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p1_resp))
     p1_proposal_group_resp = functions.checkNotFoundArray(re.findall('type: 4, reserved: 0x0, id: (.+?)\n', p1_resp))
@@ -167,7 +172,30 @@ def extractor(filePath):
     remote_sa_sent = remote_sa_sent[0][1] if remote_sa_sent !=  "Not found" else "Not found"
 
     tunnelMsg = ""
-    tunelUp = True if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog)  else  False
+    tunelUp = False
+    tunnelUpSlice = ""
+    verifyDelete_1 = False
+    verifyDelete_2 = False
+    verifyDelete_3 = False
+    
+    if re.search(r'CurState: READY Event: EV_I_OK',userLog) or re.search(r'CurState: READY Event: EV_R_OK',userLog):
+        tunelUp = True
+
+        if re.search(r'CurState: READY Event: EV_I_OK',userLog):
+            tunnelUpSlice = sliceText("CurState: READY Event: EV_R_OK", "Deleting SA", filePath)
+        elif re.search(r'CurState: READY Event: EV_R_OK',userLog):
+            tunnelUpSlice = sliceText("CurState: READY Event: EV_R_OK", "Deleting SA", filePath)
+        
+        verifyDelete_1 = re.search(r'flags: RESPONDER MSG-RESPONSE',tunnelUpSlice)
+        verifyDelete_2 = re.search(r'Payload contents:',tunnelUpSlice)
+        verifyDelete_3 = re.search(r'Next payload: DELETE',tunnelUpSlice)
+
+        if verifyDelete_1 and verifyDelete_2 and verifyDelete_3:
+            tunelUp = False
+    else:
+        tunelUp = False
+
+    #"flags: RESPONDER MSG-RESPONSE" seguido de esto "Payload contents:" seguido de "Next payload: DELETE"
     if tunelUp:
         tunnelMsg = "Tunnel seems to be up! Here are some useful commands:\n\n=== Verify overall VPN ===\nshow vpn-sessiondb detail l2l filter name %s\n=== Verify your crypto counters through the tunnel ===\nshow crypto ipsec sa peer %s | i caps|ident\n=== Check traffic is hitting the right NAT and phases ===\npacket-tracer input inside icmp %s 8 0 %s detail\n=== Verify traffic on outside interface with captures ===\ncapture OUT interface outside match ip host %s host %s"  % (peerIp, peerIp, local_sa_sent, remote_sa_sent, peerIp, localIp)
 
@@ -199,8 +227,11 @@ def extractor(filePath):
         "Agreed encryption: ": p1_proposal_encryption_resp,
         "Agreed PRF group: ": p1_proposal_prf_resp,
         "Agreed hashing: ": p1_proposal_integrity_resp,
-        "Agreed DH Group: ": p1_proposal_group_resp[0].split('/')[1],
+        #"Agreed DH Group: ": p1_proposal_group_resp[0].split('/')[1],
     }
+
+    print("@@@@@@@@@@@@@@@@@@@@@@@@2222")
+    print(p1_proposal_group_resp[0])
 
     fase2 = {
         "Amount of Phase 2 proposals sent: ": proposal_number_phase_2,
@@ -234,6 +265,29 @@ def extractor(filePath):
 
 def filterProposal(match_start, match_end, filePath):
     debug_file = open(filePath)
+    debug_lines = debug_file.readlines()
+
+    print(match_start)
+    print("#################")
+    print(match_end)
+
+    i=0
+    res = ""
+    try:
+        for log in debug_lines:
+            if re.search(r''+match_start, debug_lines[i]):
+                while True:
+                    if re.search(r''+match_end, debug_lines[i]):
+                        return res
+                    res += debug_lines[i]
+                    i += 1
+            i = i + 1
+        return p1_prop_string
+    except Exception:
+        return "Not found"
+
+def sliceText(match_start, match_end, filePath):
+    debug_file = open(filePath)
 
     debug_lines = debug_file.readlines()
     i=0
@@ -247,6 +301,6 @@ def filterProposal(match_start, match_end, filePath):
                     res += debug_lines[i]
                     i += 1
             i = i + 1
-        return p1_prop_string
+        return ""
     except Exception:
         return "Not found"
