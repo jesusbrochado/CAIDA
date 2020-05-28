@@ -20,11 +20,11 @@ def extractor(filePath):
     localIp = ""
 
     if iniciator:
-        peerSlice =  re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\n', userLog).group(0)
+        peerSlice =  functions.checkNotFoundGroup0(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\n', userLog))
         peerIp = functions.checkNotFound(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\]:500', peerSlice))
         localIp = functions.checkNotFound(re.search('\]:500->\[(.+?)\]:500', peerSlice))
     else:
-        peerSlice =  re.search('ending Packet \[To (.+?)\n', userLog).group(0)
+        peerSlice =  functions.checkNotFoundGroup0(re.search('ending Packet \[To (.+?)\n', userLog))
         peerIp = functions.checkNotFound(re.search('ending Packet \[To(.+?):500/', peerSlice))
         localIp = functions.checkNotFound(re.search('/From (.+?):500/VRF i0:f0\]', peerSlice))
 
@@ -121,10 +121,6 @@ def extractor(filePath):
     #LOAD PHASE 1 RESP
     p1_proposal_resp = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_resp))
     p1_proposal_encryption_resp = functions.checkNotFoundArray(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_resp))
-
-
-    print("$$$$$$$$$$$$$$$$$$$$$$")
-    print(re.findall('type: 1, reserved: 0x0, id: (.+?)\n', p1_resp))
 
     p1_proposal_prf_resp = functions.checkNotFoundArray( re.findall('type: 2, reserved: 0x0, id: (.+?)\n', p1_resp))
     p1_proposal_integrity_resp = functions.checkNotFoundArray(re.findall('type: 3, reserved: 0x0, id: (.+?)\n', p1_resp))
@@ -229,9 +225,6 @@ def extractor(filePath):
         "Agreed hashing: ": p1_proposal_integrity_resp,
         #"Agreed DH Group: ": p1_proposal_group_resp[0].split('/')[1],
     }
-
-    print("@@@@@@@@@@@@@@@@@@@@@@@@2222")
-    print(p1_proposal_group_resp[0])
 
     fase2 = {
         "Amount of Phase 2 proposals sent: ": proposal_number_phase_2,

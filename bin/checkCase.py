@@ -97,7 +97,8 @@ class CheckCase():
         # Case 106
         if logs["13967"] and logs["13968"] and logs["13969"] and logs["13970"] and logs["13971"] and logs["13972"]:
             message = "PSK mismatch, verify that both peers have matching PSKs"
-
+        elif logs["13971"] and logs["13972"]:
+            message = "No response to our authentication request, make sure that shared secrets match"
         # Case 107
         elif logs["13970"] and logs["13971"] and logs["13973"] and logs["13975"]:
             message = "Authentication failed because the authentication types between the peers do not match, make sure they are set to match PSK or Certificate."
@@ -154,6 +155,8 @@ class CheckCase():
                 compare1 = compare1.split(" ")
                 compare2 = re.search('Proposal 1:  (.+?)\n', compare2).group(1)
                 compare2 = compare2.split(" ")
+                
+                message = "Phase 1 policy mismatch in: "
 
                 if compare1[0] != compare2[0]:
                     message = message + "ENCRYPTION" + "; "

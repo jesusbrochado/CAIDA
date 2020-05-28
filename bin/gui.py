@@ -43,7 +43,7 @@ class Application(ttk.Frame):
             btnImport.grid(row=0, column=1, sticky="ew", ipady=3, padx=10)
             frTop.grid_columnconfigure(1, weight=1)
             
-            btnExec = tk.Button(frTop, bg="#ffffff", text="Execute", command=self.run, font=("Georgia", 12))
+            btnExec = tk.Button(frTop, bg="#ffffff", text="Analyze", command=self.run, font=("Georgia", 12))
             btnExec.grid(row=0, column=2, sticky="ew", ipady=3, padx=10)
             frTop.grid_columnconfigure(2, weight=1)
             
@@ -143,7 +143,7 @@ class Application(ttk.Frame):
             self.frBot.grid(row=2, column=0, sticky="nsew",columnspan=3)
             self.frBot.grid_columnconfigure(1, weight=2)
             
-            self.lblConf = tk.Label(self.frBot,bg="#ffffff", text="Some Message here", font=("Georgia", 12))            
+            self.lblConf = tk.Label(self.frBot,bg="#ffffff", text="", font=("Georgia", 12))            
             self.lblConf.grid(row=2, column=1, sticky="nsew", padx=10, pady=10)
             self.lblConf.grid_rowconfigure(1, weight=5)
             self.frBot.grid_rowconfigure(2, weight=8)

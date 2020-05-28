@@ -28,6 +28,16 @@ def checkNotFound(log):
         if (e == 'NoneType'):
             return "Not Found"
 
+def checkNotFoundGroup0(log):
+    try:
+        if not (log is None):
+            return log.group(0)
+        else:
+            return "Not found"
+    except Exception as e:
+        if (e == 'NoneType'):
+            return "Not Found"
+
 def checkNotFoundArray(array):
     try:
         if(len(array) != 0):
