@@ -116,80 +116,70 @@ class CheckCase():
         elif logs["13128"] and logs["13129"] and logs["13130"]:
 
 
-            # i = 1
-            # proposals = re.search('Expected Policies:\nProposal %i:(.+?)\n' % i, userLog)#.group(1)
-
-            # # Proposal 1:  AES-CBC-256 SHA1 SHA256 DH_GROUP_2048_MODP/Group 14
-
-            # # Proposal 2:  AES-CBC-128 SHA1 SHA256 DH_GROUP_1536_MODP/Group 5
-
-            # while proposals is not None:
-            #     proposals = proposals.group(1)
-            #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            #     print(proposals)
-            #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            #     i = i+1
-            #     proposals = re.search('%s\n\nProposal %i:(.+?)\n' % (proposals, i), userLog)
-
-            # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-
+            i = 1
+            constEspCompare1 = ""
             espCompare1 = re.search('Received Policies:\nESP: Proposal 1:  (.+?)\n', userLog)
-            espCompare2 = re.search('Expected Policies:\nESP: Proposal 0:  (.+?)\n', userLog)
-            compare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog)
-            compare2 = re.search('Expected Policies:\nProposal 1:  (.+?)\n', userLog)
+            espCompare2 = []
+            espProposal = re.search('Expected Policies:\nESP: Proposal 0:  (.+?)\n', userLog)
+            if espProposal is not None:
+                espCompare2.append(espProposal.group(1))
 
-            
+            while espProposal is not None:
+                i = i+1
+                proposals = re.search('%s\n\n\nESP: Proposal %i:  (.+?)\n' % (proposals.group(1), i), userLog)
+                if proposals is not None:
+                    espCompare2.append(proposals.group(1))
 
-            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
-            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
-            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
-            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
-            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
-            # PENDING POLICY MESSAGE AND MULTIPOLICY MISSMATCH
+            compare1 = ""
+            constCompare1 = re.search('Received Policies:\nProposal 1:  (.+?)\n', userLog)
+            compare2 = []
+            proposals = re.search('Expected Policies:\nProposal %i:  (.+?)\n' % i, userLog)
+            if proposals is not None:
+                compare2.append(proposals.group(1))
 
-            if compare1 is not None and compare2 is not None:
-                compare1 = compare1.group(0)
-                compare2 = compare2.group(0)
+            while proposals is not None:
+                i = i+1
+                proposals = re.search('%s\n\nProposal %i:  (.+?)\n' % (proposals.group(1), i), userLog)
+                if proposals is not None:
+                    compare2.append(proposals.group(1))
+                    
+            for i, item in enumerate(compare2):
+                if constCompare1 is not None:
+                    compare1 = constCompare1.group(1).split(" ")  
+                    compare2 = item.split(" ")
+                    message = message + "\nPhase %i policy mismatch in: " % i
+                    if compare1[0] != compare2[0]:
+                        message = message + "ENCRYPTION" + "; "
 
-                compare1 = re.search('Proposal 1:  (.+?)\n', compare1).group(1)
-                compare1 = compare1.split(" ")
-                compare2 = re.search('Proposal 1:  (.+?)\n', compare2).group(1)
-                compare2 = compare2.split(" ")
-                
-                message = "Phase 1 policy mismatch in: "
+                    if compare1[1] != compare2[1]:
+                        message = message + "PRF" + "; "
 
-                if compare1[0] != compare2[0]:
-                    message = message + "ENCRYPTION" + "; "
+                    if compare1[2] != compare2[2]:
+                        message = message + "HASH" + "; "
 
-                if compare1[1] != compare2[1]:
-                    message = message + "PRF" + "; "
+                    if  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
+                        message = message + "DH Group" + "; "
 
-                if compare1[2] != compare2[2]:
-                    message = message + "HASH" + "; "
+                elif(constEspCompare1 is not None):
+                    compare1 = espCompare1.group(1).split(" ")  
+                    compare2 = item.split(" ")
+                    message = message + "\nPhase %i policy mismatch in: " % i
+                    compare1 = re.search('ESP: Proposal 1:  (.+?)\n', compare1).group(1)
+                    compare1 = compare1.split(" ")
+                    compare2 = re.search('ESP: Proposal 0:  (.+?)\n', compare2).group(1)
+                    compare2 = compare2.split(" ")
 
-                if  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
-                    message = message + "DH Group" + "; "
-
-            elif(espCompare1 is not None and espCompare2 is not None):
-                compare1 = espCompare1.group(0)
-                compare2 = espCompare2.group(0)
-
-                compare1 = re.search('ESP: Proposal 1:  (.+?)\n', compare1).group(1)
-                compare1 = compare1.split(" ")
-                compare2 = re.search('ESP: Proposal 0:  (.+?)\n', compare2).group(1)
-                compare2 = compare2.split(" ")
-
-                if compare1[0] != compare2[0]:
-                    message = "Transform set mismatch on phase 2, verify that ENCRYPTION match"
-                elif compare1[1] != compare2[1]:
-                    message = "Transform set mismatch on phase 2, verify that HASH  match"
-                elif compare1[0] != compare2[0] and compare1[1] != compare2[1]:
-                    message = "Transform set mismatch on phase 2, verify that ENCRYPTION and HASH match"
-            else:
-                message = "Phase 2 mismatch, verify that on the crypto map configuration the proper peer IP, ACLs and transform sets are configured"
+                    if compare1[0] != compare2[0]:
+                        message = "Transform set mismatch on phase 2, verify that ENCRYPTION match"
+                    elif compare1[1] != compare2[1]:
+                        message = "Transform set mismatch on phase 2, verify that HASH  match"
+                    elif compare1[0] != compare2[0] and compare1[1] != compare2[1]:
+                        message = "Transform set mismatch on phase 2, verify that ENCRYPTION and HASH match"
+                else:
+                    message = "Phase 2 mismatch, verify that on the crypto map configuration the proper peer IP, ACLs and transform sets are configured"
 
         elif logs["11003"] and logs["11917"] and logs["11918"] :
-             message = "tunnel-group for peer %s missing keys" % peer
+            message = "tunnel-group for peer %s missing keys" % peer
 
         # Case 105
         elif logs["13065"] and logs["13966"]:
@@ -213,5 +203,5 @@ class CheckCase():
         return message
 
 
-ch = CheckCase('../logs/Encryption_ThenEncryptionAndGroup.txt')
-print(ch.extractInfo())
+# ch = CheckCase('../logs/Encryption_ThenEncryptionAndGroup.txt')
+# print(ch.extractInfo())
