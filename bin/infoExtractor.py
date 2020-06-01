@@ -260,10 +260,6 @@ def filterProposal(match_start, match_end, filePath):
     debug_file = open(filePath)
     debug_lines = debug_file.readlines()
 
-    print(match_start)
-    print("#################")
-    print(match_end)
-
     i=0
     res = ""
     try:
