@@ -192,10 +192,14 @@ class Application(ttk.Frame):
             mess = CheckCase(filePath).extractInfo()
             mess = mess if len(mess) > 0 else self.tunnelMsg
             
-            messagebox.showinfo("STATUS", "Analysis done")   
+            messagebox.showinfo("STATUS", "Analysis done")
+            
 
             #Print phase1, phase2 and misc in Gui
             self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase1.items())
+            self.frCenterLeftContent.update_idletasks()
+            self.cvCenterLeft.config(scrollregion=self.cvCenterLeft.bbox("all"))
+
             self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.misc.items())
             self.lblPhase2['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items())
             self.lblConf['text'] = "%s" % (mess)
