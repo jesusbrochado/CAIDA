@@ -3,6 +3,7 @@
 #Imports
 import lambdas, functions
 import re
+from tkinter import *
 
 def extractor(filePath):
     ## DECLARATIONS

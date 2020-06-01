@@ -2,7 +2,7 @@
 # encoding: utf-8
 #Imports
 import tkinter as tk
-from tkinter import ttk, Entry, filedialog
+from tkinter import ttk, Entry, filedialog, messagebox
 #from code import functions, lambdas
 import functions, lambdas
 import infoExtractor
@@ -27,25 +27,22 @@ class Application(ttk.Frame):
             self.misc = res[2]
             self.tunnelMsg = res[3]
 
-            
-            
-            
             #Frame top
-            frTop = tk.Frame(self,bg="#f4f7ff",width=120, height=80)
-            frTop.grid(row=0, column=0, sticky="nsew",columnspan=3)
-            frTop.grid_rowconfigure(0, weight=1)
+            self.frTop = tk.Frame(self,bg="#f4f7ff",width=120, height=80)
+            self.frTop.grid(row=0, column=0, sticky="nsew",columnspan=3)
+            self.frTop.grid_rowconfigure(0, weight=1)
            
-            enImport = tk.Entry(frTop,font=("Georgia", 12))
-            enImport.grid(row=0, column=0, sticky="ew", ipady=5, padx=10, ipadx=10)
-            frTop.grid_columnconfigure(0, weight=8)
+            self.lblImport = tk.Label(self.frTop,bg="white",font=("Georgia", 12))
+            self.lblImport.grid(row=0, column=0, sticky="ew", ipady=5, padx=10, ipadx=10)
+            self.frTop.grid_columnconfigure(0, weight=8)
             
-            btnImport = tk.Button(frTop, bg="#ffffff", text="Save", command=self.exportTxt,font=("Georgia", 12))
-            btnImport.grid(row=0, column=1, sticky="ew", ipady=3, padx=10)
-            frTop.grid_columnconfigure(1, weight=1)
+            self.btnImport = tk.Button(self.frTop, bg="#ffffff", text="Export", command=self.exportTxt,font=("Georgia", 12))
+            self.btnImport.grid(row=0, column=1, sticky="ew", ipady=3, padx=10)
+            self.frTop.grid_columnconfigure(1, weight=1)
             
-            btnExec = tk.Button(frTop, bg="#ffffff", text="Analyze", command=self.run, font=("Georgia", 12))
-            btnExec.grid(row=0, column=2, sticky="ew", ipady=3, padx=10)
-            frTop.grid_columnconfigure(2, weight=1)
+            self.btnExec = tk.Button(self.frTop, bg="#ffffff", text="Load File", command=self.run, font=("Georgia", 12))
+            self.btnExec.grid(row=0, column=2, sticky="ew", ipady=3, padx=10)
+            self.frTop.grid_columnconfigure(2, weight=1)
             
             #Frame center left
             
@@ -168,6 +165,9 @@ class Application(ttk.Frame):
             self.rowconfigure(2, weight=7)
             self.columnconfigure(2, weight=1)
 
+
+        
+
         def exportTxt(self):
             ftypes = [('Postscript files', '.txt'), ('All files', '*')]
             filePath = filedialog.asksaveasfilename(initialfile = 'caida-output',filetypes=ftypes, defaultextension='.txt')
@@ -180,8 +180,9 @@ class Application(ttk.Frame):
             f.write("\n\n======================================== \n==== Misc \n========================================\n")
             f.write('\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items()))
             f.close()
-
+        
         def run(self):
+
             filePath = filedialog.askopenfilename()
             res = extractor(filePath)
             self.fase1 = res[0]
@@ -191,11 +192,18 @@ class Application(ttk.Frame):
             mess = CheckCase(filePath).extractInfo()
             mess = mess if len(mess) > 0 else self.tunnelMsg
             
+            messagebox.showinfo("STATUS", "Analysis done")
+            
+
             #Print phase1, phase2 and misc in Gui
             self.lblPhase1['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase1.items())
+            self.frCenterLeftContent.update_idletasks()
+            self.cvCenterLeft.config(scrollregion=self.cvCenterLeft.bbox("all"))
+
             self.lblPhase0['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.misc.items())
             self.lblPhase2['text'] = '\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items())
             self.lblConf['text'] = "%s" % (mess)
+            self.lblImport['text'] = filePath
 
 main_window = tk.Tk()
 app = Application(main_window)
