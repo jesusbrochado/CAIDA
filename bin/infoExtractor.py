@@ -111,6 +111,8 @@ def extractor(filePath):
 
     sa_traffic_agreed_local= filterProposal('TSi  Next payload: TSr', ' TSr  Next payload: NOTIFY, res', filePath)
     sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: I_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
+    if sa_traffic_agreed_remote == "Not found":
+        sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: R_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
 
     #LOAD PHASE 1 SENT
     p1_proposal = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_prop_string))
@@ -198,7 +200,7 @@ def extractor(filePath):
 
 
     fase1 = {
-        "Are we initiators: ": iniciator,
+        "We are ": "iniciator" if iniciator==True else "responder" ,
         # Revisar por que extraimos esto, parece que se corrompio
         # "Phase 1 proposals": proposal_phase_1,
         "Authentication Method: ": proposalType,
@@ -272,7 +274,7 @@ def filterProposal(match_start, match_end, filePath):
                     res += debug_lines[i]
                     i += 1
             i = i + 1
-        return p1_prop_string
+        return "Not found"
     except Exception:
         return "Not found"
 
