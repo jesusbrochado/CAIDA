@@ -61,5 +61,4 @@ def checkNotFoundCase(log):
             
 def UploadAction(event=None):
     filename = filedialog.askopenfilename()
-    print('Selected: ', filename)
     return filename

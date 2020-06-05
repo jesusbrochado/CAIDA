@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 #Imports
+from tkinter import *
 import tkinter as tk
 from tkinter import ttk, Entry, filedialog, messagebox
 #from code import functions, lambdas
@@ -34,15 +35,19 @@ class Application(ttk.Frame):
            
             self.lblImport = tk.Label(self.frTop,bg="white",font=("Georgia", 12))
             self.lblImport.grid(row=0, column=0, sticky="ew", ipady=5, padx=10, ipadx=10)
-            self.frTop.grid_columnconfigure(0, weight=8)
+            self.frTop.grid_columnconfigure(0, weight=16)
             
             self.btnImport = tk.Button(self.frTop, bg="#ffffff", text="Export", command=self.exportTxt,font=("Georgia", 12))
             self.btnImport.grid(row=0, column=1, sticky="ew", ipady=3, padx=10)
-            self.frTop.grid_columnconfigure(1, weight=1)
+            self.frTop.grid_columnconfigure(1, weight=2)
             
             self.btnExec = tk.Button(self.frTop, bg="#ffffff", text="Load File", command=self.run, font=("Georgia", 12))
             self.btnExec.grid(row=0, column=2, sticky="ew", ipady=3, padx=10)
-            self.frTop.grid_columnconfigure(2, weight=1)
+            self.frTop.grid_columnconfigure(2, weight=2)
+
+            self.btnHelp = tk.Button(self.frTop, bg="#ffffff", text="Help", command=self.help, font=("Georgia", 12))
+            self.btnHelp.grid(row=0, column=3, sticky="ew", ipady=3, padx=10)
+            self.frTop.grid_columnconfigure(3, weight=1)
             
             #Frame center left
             
@@ -142,8 +147,8 @@ class Application(ttk.Frame):
             
             self.lblConf = tk.Label(self.frBot,bg="#ffffff", text="", font=("Georgia", 12))            
             self.lblConf.grid(row=2, column=1, sticky="nsew", padx=10, pady=10)
-            self.lblConf.grid_rowconfigure(1, weight=5)
-            self.frBot.grid_rowconfigure(2, weight=8)
+            self.lblConf.grid_rowconfigure(1, weight=3)
+            self.frBot.grid_rowconfigure(2, weight=6)
 
             
             #Frame Footer
@@ -162,8 +167,9 @@ class Application(ttk.Frame):
             self.rowconfigure(0, weight=5)
             self.rowconfigure(1, weight=20)
             self.columnconfigure(1, weight=1)
-            self.rowconfigure(2, weight=7)
+            self.rowconfigure(2, weight=6)
             self.columnconfigure(2, weight=1)
+            
 
 
         
@@ -181,6 +187,27 @@ class Application(ttk.Frame):
             f.write('\n'.join('{} {}'.format(k, d) for k, d in self.fase2.items()))
             f.close()
         
+        def help(self):
+
+            win = Toplevel()
+            win.title('HELP')
+            #win.geometry("720x480")
+            win.minsize(width=720, height=480)
+            win.columnconfigure(0, weight=1)
+            win.rowconfigure(0, weight=1)
+            win.rowconfigure(1, weight=1)
+            win['bg']='white'
+            with open("bin/readme.txt") as f:
+                readme = f.read()
+                message = str(readme)
+                self.helptext = self.lblImport = tk.Label(win, bg="white", justify='left', font=("Georgia", 12), text=message)
+                self.helptext.grid(row=0, column=0, sticky="nw", ipady=5, padx=10, ipadx=10)
+                
+                
+                self.btnClose = tk.Button(win, bg="#ffffff", text="Close", command=win.destroy,font=("Georgia", 12))
+                self.btnClose.grid(row=1, column=0, sticky="ew", ipady=3, padx=10)
+                #Button(win, text='Close', command=win.destroy).grid()
+
         def run(self):
 
             filePath = filedialog.askopenfilename()
