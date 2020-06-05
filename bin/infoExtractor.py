@@ -111,6 +111,8 @@ def extractor(filePath):
 
     sa_traffic_agreed_local= filterProposal('TSi  Next payload: TSr', ' TSr  Next payload: NOTIFY, res', filePath)
     sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: I_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
+    if sa_traffic_agreed_remote == "Not found":
+        sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: R_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
 
     #LOAD PHASE 1 SENT
     p1_proposal = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_prop_string))
@@ -198,7 +200,7 @@ def extractor(filePath):
 
 
     fase1 = {
-        "Are we initiators: ": iniciator,
+        "We are ": "iniciator" if iniciator==True else "responder" ,
         # Revisar por que extraimos esto, parece que se corrompio
         # "Phase 1 proposals": proposal_phase_1,
         "Authentication Method: ": proposalType,
@@ -235,12 +237,12 @@ def extractor(filePath):
         "p2_proposal_hash: ": p2_proposal_hash,
         "p2_proposal_esn: ": p2_proposal_esn,
         ## Interesting Traffic Local  Sent
-        "Local trigger IP: ": local_sa_sent,
+        "Local trigger IP: ": "%s - %s" % (agreed_sa_local[0][0], agreed_sa_local[0][1]) if agreed_sa_local !=  "Not found" else "Not found", #local_sa_sent,
         ## Interesting Traffic Remote  Sent
-        "Remote trigger IP: ": remote_sa_sent,
+        "Remote trigger IP: ": "%s - %s" % (agreed_sa_remote[0][0], agreed_sa_remote[0][1]) if agreed_sa_remote !=  "Not found" else "Not found", # remote_sa_sent,
         ## AGREED INTERSTING TRAFFIC
-        "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[0][0], agreed_sa_local[0][1]) if agreed_sa_local !=  "Not found" else "Not found",
-        "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[0][0], agreed_sa_remote[0][1]) if agreed_sa_remote !=  "Not found" else "Not found"
+        "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[1][0], agreed_sa_local[1][1]) if agreed_sa_local !=  "Not found" else "Not found",
+        "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[1][0], agreed_sa_remote[1][1]) if agreed_sa_remote !=  "Not found" else "Not found"
     }
 
     misc = {
@@ -261,10 +263,6 @@ def filterProposal(match_start, match_end, filePath):
     debug_file = open(filePath)
     debug_lines = debug_file.readlines()
 
-    print(match_start)
-    print("#################")
-    print(match_end)
-
     i=0
     res = ""
     try:
@@ -276,7 +274,7 @@ def filterProposal(match_start, match_end, filePath):
                     res += debug_lines[i]
                     i += 1
             i = i + 1
-        return p1_prop_string
+        return "Not found"
     except Exception:
         return "Not found"
 
