@@ -142,12 +142,12 @@ class CheckCase():
                 proposals = re.search('%s\n\nProposal %i:  (.+?)\n' % (proposals.group(1), i), userLog)
                 if proposals is not None:
                     compare2.append(proposals.group(1))
-           
+                
             if constCompare1 is not None:
                 for i, item in enumerate(compare2):
                     compare1 = constCompare1.group(1).split(" ")
                     compare2 = item.split(" ")
-                    message = message + "\nPhase %i policy mismatch in: " % i
+                    message = message + "\nPhase 1 mismatch in policy %i: " % (i+1)
                     if compare1[0] != compare2[0]:
                         message = message + "ENCRYPTION" + " " + compare2[0] + "; "
 
@@ -158,7 +158,7 @@ class CheckCase():
                         message = message + "HASH" + " " + compare2[2] + "; "
 
                     if  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
-                        message = message + "DH Group" + " " + compare2[3] + "; "      
+                        message = message + "DH Group %s;" % (compare1[4])      
             elif(constEspCompare1 is not None):
                 compare1 = constEspCompare1.group(1).split(" ")
 

@@ -22,12 +22,19 @@ def extractor(filePath):
 
     if iniciator:
         peerSlice =  functions.checkNotFoundGroup0(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\n', userLog))
-        peerIp = functions.checkNotFound(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\]:500', peerSlice))
-        localIp = functions.checkNotFound(re.search('\]:500->\[(.+?)\]:500', peerSlice))
+        peerIp = functions.checkNotFound(re.search('RECV PKT \[IKE_SA_INIT\] \[(.+?)\]:', peerSlice))
+        localIp = functions.checkNotFound(re.search('\]:500->\[(.+?)\]:', peerSlice))
+
+        if peerSlice == "Not found":
+            peerSlice =  functions.checkNotFoundGroup0(re.search('Sending Packet \[To (.+?)/VRF i0:f0\]', userLog))
+            peerIp = functions.checkNotFound(re.search('Sending Packet \[To (.+?):', peerSlice))
+            localIp = functions.checkNotFound(re.search('From (.+?):', peerSlice))
+
     else:
         peerSlice =  functions.checkNotFoundGroup0(re.search('ending Packet \[To (.+?)\n', userLog))
-        peerIp = functions.checkNotFound(re.search('ending Packet \[To(.+?):500/', peerSlice))
-        localIp = functions.checkNotFound(re.search('/From (.+?):500/VRF i0:f0\]', peerSlice))
+        peerIp = functions.checkNotFound(re.search('ending Packet \[To(.+?):', peerSlice))
+        localIp = functions.checkNotFound(re.search('/From (.+?)/VRF i0:f0\]', peerSlice))
+        localIp = localIp.split(":")[0]
 
 
     if ((functions.checkNotFound(re.search('attempting to find tunnel group for IP:(.+?)\n', userLog)) != TXTNoFound)):
@@ -109,10 +116,10 @@ def extractor(filePath):
 
     #PENDINTE! SI LO DE ABAJO VACIO, ENTONCES USAR LA ULTIMA POSICION DE LAS LISTAS DE sa_traffic_init_local Y sa_traffic_init_remote
 
-    sa_traffic_agreed_local= filterProposal('TSi  Next payload: TSr', ' TSr  Next payload: NOTIFY, res', filePath)
-    sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: I_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
+    sa_traffic_agreed_local= filterProposal('TSi(.+?)Next payload: TSr', ' TSr(.+?)Next payload: NOTIFY, res', filePath)
+    sa_traffic_agreed_remote= filterProposal('TSr(.+?)Next payload: NOTIFY', 'CurState: I_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
     if sa_traffic_agreed_remote == "Not found":
-        sa_traffic_agreed_remote= filterProposal('TSr  Next payload: NOTIFY', 'CurState: R_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
+        sa_traffic_agreed_remote= filterProposal('TSr(.+?)Next payload: NOTIFY', 'CurState: R_WAIT_AUTH Event: EV_RECV_AUTH', filePath)
 
     #LOAD PHASE 1 SENT
     p1_proposal = functions.checkNotFoundArray(re.findall('Proposal: (.+?)', p1_prop_string))
