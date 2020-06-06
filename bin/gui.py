@@ -197,7 +197,7 @@ class Application(ttk.Frame):
             win.rowconfigure(0, weight=1)
             win.rowconfigure(1, weight=1)
             win['bg']='white'
-            with open("bin/readme.txt") as f:
+            with open("./readme.txt") as f:
                 readme = f.read()
                 message = str(readme)
                 self.helptext = self.lblImport = tk.Label(win, bg="white", justify='left', font=("Georgia", 12), text=message)

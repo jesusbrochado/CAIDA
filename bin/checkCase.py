@@ -142,8 +142,7 @@ class CheckCase():
                 proposals = re.search('%s\n\nProposal %i:  (.+?)\n' % (proposals.group(1), i), userLog)
                 if proposals is not None:
                     compare2.append(proposals.group(1))
-
-            
+           
             if constCompare1 is not None:
                 for i, item in enumerate(compare2):
                     compare1 = constCompare1.group(1).split(" ")
@@ -159,10 +158,8 @@ class CheckCase():
                         message = message + "HASH" + " " + compare2[2] + "; "
 
                     if  "%s %s" % (compare1[3], compare1[4]) != "%s %s" % (compare2[3], compare2[4]):
-                        message = message + "DH Group" + " " + compare2[3] + "; "
-                    
-            
-            if(constEspCompare1 is not None):
+                        message = message + "DH Group" + " " + compare2[3] + "; "      
+            elif(constEspCompare1 is not None):
                 compare1 = constEspCompare1.group(1).split(" ")
 
                 message = message + "\nPhase 2 policy mismatch in transform set: \n\n"
@@ -174,8 +171,6 @@ class CheckCase():
                         message = message + "TSet %i mismatch Encryption:  %s" % (i+1, compare2[0])
                     elif compare1[1] != compare2[1]:
                         message = message + "TSet %i mismatch Hash:  %s" % (i+1, compare2[1])
-                    # else: #compare1[0] != compare2[0] and compare1[1] != compare2[1]:
-                    #      message = message + "Transform set mismatch on phase 2, verify that ENCRYPTION and HASH match"
                 if len(espCompare2) == 0:
                     message = "Phase 2 mismatch, verify that on the crypto map configuration the proper peer IP, ACLs and transform sets are configured"
             else:
