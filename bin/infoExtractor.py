@@ -233,8 +233,12 @@ def extractor(filePath):
         "Agreed encryption: ": p1_proposal_encryption_resp,
         "Agreed PRF group: ": p1_proposal_prf_resp,
         "Agreed hashing: ": p1_proposal_integrity_resp,
-        #"Agreed DH Group: ": p1_proposal_group_resp[0].split('/')[1],
+        "Agreed DH Group: ": p1_proposal_group_resp[0].split('/')[1],
     }
+
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print(agreed_sa_remote)
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
     fase2 = {
         "Amount of Phase 2 proposals sent: ": proposal_number_phase_2,
@@ -244,12 +248,12 @@ def extractor(filePath):
         "p2_proposal_hash: ": p2_proposal_hash,
         "p2_proposal_esn: ": p2_proposal_esn,
         ## Interesting Traffic Local  Sent
-        "Local trigger IP: ": "%s - %s" % (agreed_sa_local[0][0], agreed_sa_local[0][1]) if agreed_sa_local !=  "Not found" else "Not found", #local_sa_sent,
+        "Local trigger IP: ": "%s" % (agreed_sa_local[0][0]) if agreed_sa_local !=  "Not found" else "Not found", #local_sa_sent,
         ## Interesting Traffic Remote  Sent
-        "Remote trigger IP: ": "%s - %s" % (agreed_sa_remote[0][0], agreed_sa_remote[0][1]) if agreed_sa_remote !=  "Not found" else "Not found", # remote_sa_sent,
+        "Remote trigger IP: ": "%s" % (agreed_sa_remote[0][0]) if agreed_sa_remote !=  "Not found" else "Not found", # remote_sa_sent,
         ## AGREED INTERSTING TRAFFIC
-        "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[1][0], agreed_sa_local[1][1]) if agreed_sa_local !=  "Not found" else "Not found",
-        "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[1][0], agreed_sa_remote[1][1]) if agreed_sa_remote !=  "Not found" else "Not found"
+        "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[1][0] if len(agreed_sa_local) > 1 else agreed_sa_local[0][0], agreed_sa_local[1][1] if len(agreed_sa_local) > 1 else agreed_sa_local[0][0]),
+        "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[1][0] if len(agreed_sa_remote) > 1 else agreed_sa_remote[0][0], agreed_sa_remote[1][1] if len(agreed_sa_remote) > 1 else agreed_sa_remote[0][0])
     }
 
     misc = {
