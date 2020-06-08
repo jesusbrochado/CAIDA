@@ -237,8 +237,21 @@ def extractor(filePath):
     }
 
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    print(agreed_sa_remote)
+    print(local_sa_sent)
+    print(remote_sa_sent)
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+    if  agreed_sa_local != 'Not found': 
+        if len(agreed_sa_local) > 1:
+            agreed_sa_local = "%s - %s" % (agreed_sa_local[1][0], agreed_sa_local[1][1])
+        else:
+            agreed_sa_local = "%s - %s" % (agreed_sa_local[0][0], agreed_sa_local[0][1])
+
+    if  agreed_sa_remote != 'Not found': 
+        if len(agreed_sa_remote) > 1:
+            agreed_sa_remote = "%s - %s" % (agreed_sa_remote[1][0], agreed_sa_remote[1][1])
+        else:
+            agreed_sa_remote = "%s - %s" % (agreed_sa_remote[0][0], agreed_sa_remote[0][1])
 
     fase2 = {
         "Amount of Phase 2 proposals sent: ": proposal_number_phase_2,
@@ -248,12 +261,12 @@ def extractor(filePath):
         "p2_proposal_hash: ": p2_proposal_hash,
         "p2_proposal_esn: ": p2_proposal_esn,
         ## Interesting Traffic Local  Sent
-        "Local trigger IP: ": "%s" % (agreed_sa_local[0][0]) if agreed_sa_local !=  "Not found" else "Not found", #local_sa_sent,
+        "Local trigger IP: ": "%s" % agreed_sa_local.split(" - ")[0], #local_sa_sent,
         ## Interesting Traffic Remote  Sent
-        "Remote trigger IP: ": "%s" % (agreed_sa_remote[0][0]) if agreed_sa_remote !=  "Not found" else "Not found", # remote_sa_sent,
+        "Remote trigger IP: ": "%s" % agreed_sa_remote.split(" - ")[0], # remote_sa_sent,
         ## AGREED INTERSTING TRAFFIC
-        "Agreed SA Local: ":  "%s - %s" % (agreed_sa_local[1][0] if len(agreed_sa_local) > 1 else agreed_sa_local[0][0], agreed_sa_local[1][1] if len(agreed_sa_local) > 1 else agreed_sa_local[0][0]),
-        "Agreed SA Remote: ": "%s - %s" % (agreed_sa_remote[1][0] if len(agreed_sa_remote) > 1 else agreed_sa_remote[0][0], agreed_sa_remote[1][1] if len(agreed_sa_remote) > 1 else agreed_sa_remote[0][0])
+        "Agreed SA Local: ":  agreed_sa_local,
+        "Agreed SA Remote: ": agreed_sa_remote,
     }
 
     misc = {
